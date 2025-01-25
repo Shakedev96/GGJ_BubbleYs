@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a6316eea4c5ca40a52c7360f20670c, type: 3}
+  m_Name: Double Mint
+  m_EditorClassIdentifier: 
+  weaponName: Double Mint
+  projectilePrefab: {fileID: 4350316103495671214, guid: 80de28a1efc329c49b5d3ba9d97ed9c2,
+    type: 3}
+  fireRate: 4
+  speed: 9
+  baseDamage: 2
+  destroyTime: 5
+  currentAmmo: 2
+  slowsPlayer: 0
+  slowAmount: 0
+  areaDamage: 0
+  areaRadius: 0
+  freezesPlayer: 0
+  freezeDuration: 0
