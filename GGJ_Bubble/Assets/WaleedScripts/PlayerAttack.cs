@@ -8,47 +8,68 @@ public class PlayerAttack : MonoBehaviour
 
     public Transform shootPoint; // The point from which the bullet is shot
     private float nextFireTime = 0f;
-    private int maxAmmo = 5;
-    private int currentAmmo;
 
-    public BubbleGums CurrentWeapon => weapons[currentWeaponIndex]; // Get current weapon
+    private int[] currentAmmo; // Ammo count for each weapon (tracked locally)
+    private const int MaxAmmo = 5; // Maximum ammo for each weapon
+
+    public BubbleGums CurrentWeapon => weapons[currentWeaponIndex]; // Get the current weapon
+
+    private void Start()
+    {
+        // Initialize ammo array with starting ammo
+        currentAmmo = new int[weapons.Length];
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            currentAmmo[i] = 2; // Set initial ammo to max (5) for all weapons
+        }
+    }
 
     public void onFire(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed)
         {
             Shoot();
         }
     }
+
     public void onWeaponSwitch(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed)
         {
             SwitchWeapon();
         }
     }
 
-
-
-    //Weapon Switch
-    void SwitchWeapon()
+    private void OnTriggerEnter(Collider collision)
     {
-        // Store the initial index to avoid infinite loops
+        if (collision.CompareTag("AmmoCollectible"))
+        {
+            AmmoCollectible collectible = collision.GetComponent<AmmoCollectible>();
+            if (collectible != null)
+            {
+                CollectAmmo(collectible);
+            }
+        }
+    }
+
+    // Weapon Switch Logic
+    private void SwitchWeapon()
+    {
         int initialIndex = currentWeaponIndex;
 
         do
         {
-            // Increment the weapon index
-            currentWeaponIndex = (currentWeaponIndex + 1) % 4; // Wraps around since there are 4 weapons
+            // Increment the weapon index and wrap around if necessary
+            currentWeaponIndex = (currentWeaponIndex + 1) % weapons.Length;
 
-            // Check if the current weapon has ammo
-            //if (CurrentWeapon.currentAmmo > 0)
-            //{
-            //     // Exit the loop if the weapon has ammo
-            //}
-            break;
+            // Exit the loop if the selected weapon has ammo
+            if (currentAmmo[currentWeaponIndex] > 0)
+            {
+                Debug.Log("Switched to weapon: " + CurrentWeapon.weaponName);
+                return;
+            }
 
-            // If we've looped through all weapons, stay on the initial weapon
+            // If we've looped through all weapons and found no ammo, stay on the initial weapon
             if (currentWeaponIndex == initialIndex)
             {
                 Debug.LogWarning("No weapons with ammo available!");
@@ -56,31 +77,69 @@ public class PlayerAttack : MonoBehaviour
             }
 
         } while (true);
-
-        Debug.Log("Current Weapon: " + CurrentWeapon.weaponName);
     }
 
-    //Shoot
+    // Shooting Logic
     private void Shoot()
     {
-        if (CurrentWeapon != null && CurrentWeapon.projectilePrefab != null )  //&& CurrentWeapon.currentAmmo <= maxAmmo && CurrentWeapon.currentAmmo > 0
+        if (CurrentWeapon != null && CurrentWeapon.projectilePrefab != null)
         {
-            // Instantiate the projectile at the shoot point and apply its rotation
-            GameObject projectile = Instantiate(CurrentWeapon.projectilePrefab, shootPoint.position, shootPoint.rotation);
-
-            // Initialize the projectile with the current weapon's data
-            var bubblegumProjectile = projectile.GetComponent<BubbleGumsProjectile>();
-            if (bubblegumProjectile != null)
+            // Check if the weapon has ammo and if enough time has passed since the last shot
+            if (currentAmmo[currentWeaponIndex] > 0 && Time.time >= nextFireTime)
             {
-                bubblegumProjectile.Initialize(CurrentWeapon); // Pass the data from the selected weapon
-            }
+                // Instantiate the projectile at the shoot point
+                GameObject projectile = Instantiate(CurrentWeapon.projectilePrefab, shootPoint.position, shootPoint.rotation);
 
-            // Set next fire time based on fire rate
-            nextFireTime = Time.time + 1f / CurrentWeapon.fireRate;
+                // Initialize the projectile with the current weapon's data
+                var bubblegumProjectile = projectile.GetComponent<BubbleGumsProjectile>();
+                if (bubblegumProjectile != null)
+                {
+                    bubblegumProjectile.Initialize(CurrentWeapon); // Pass the data from the selected weapon
+                }
+
+                // Deduct one ammo and set the next fire time
+                currentAmmo[currentWeaponIndex]--;
+                nextFireTime = Time.time + 1f / CurrentWeapon.fireRate;
+
+                Debug.Log($"Shot fired! Remaining ammo for {CurrentWeapon.weaponName}: {currentAmmo[currentWeaponIndex]}");
+            }
+            else if (currentAmmo[currentWeaponIndex] <= 0)
+            {
+                Debug.LogWarning($"No ammo left for {CurrentWeapon.weaponName}!");
+            }
+            else
+            {
+                Debug.LogWarning("Weapon is on cooldown!");
+            }
         }
         else
         {
-            Debug.LogWarning("No weapon or projectile prefab assigned or No Ammo!");
+            Debug.LogWarning("No weapon or projectile prefab assigned!");
         }
+    }
+
+    // Ammo Collection Logic
+    private void CollectAmmo(AmmoCollectible collectible)
+    {
+        // Find the weapon by name and add ammo if possible
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            if (weapons[i].weaponName == collectible.weaponName)
+            {
+                if (currentAmmo[i] < MaxAmmo)
+                {
+                    currentAmmo[i]++;
+                    Debug.Log($"Collected ammo for {weapons[i].weaponName}. Current ammo: {currentAmmo[i]}");
+                    Destroy(collectible.gameObject); // Destroy the collectible
+                }
+                else
+                {
+                    Debug.Log($"Cannot pick up ammo for {weapons[i].weaponName}, max ammo reached!");
+                }
+                return;
+            }
+        }
+
+        Debug.LogWarning($"No matching weapon found for collectible: {collectible.weaponName}");
     }
 }
