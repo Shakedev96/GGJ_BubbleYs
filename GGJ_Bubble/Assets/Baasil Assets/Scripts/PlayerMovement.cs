@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove = true;
     private Rigidbody rb;
     private Vector3 moveDirection;
-    private Vector2 moveInput; // Stores the movement input
+    public Vector2 moveInput; // Stores the movement input
 
     [Header("Rotate")]
     private Vector2 rotateInput; // Stores input for rotation
@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump")]
     public float jumpForce = 5f; // Force applied when jumping
-    [SerializeField] private bool isGrounded; // Check if the player is on the ground
+    public bool isGrounded; // Check if the player is on the ground
     [SerializeField] private float groundCheckRadius = 0.3f; // Radius for sphere cast
     [SerializeField] private float groundCheckDistance = 0.3f; // Distance for sphere offset
     [SerializeField] private LayerMask groundLayer; // Layer to detect ground
@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashForce = 10f; // Total force applied during dash
     [SerializeField] private float dashDuration = 0.2f; // Time the dash lasts
     [SerializeField] private float dashCooldown = 1f; // Time before the player can dash again
-    private bool isDashing = false;
+    public bool isDashing = false;
     private bool canDash = true;
     private float dashTimeElapsed = 0f; // Tracks time passed during the dash
     private Vector3 dashDirection; // Direction of the dash
