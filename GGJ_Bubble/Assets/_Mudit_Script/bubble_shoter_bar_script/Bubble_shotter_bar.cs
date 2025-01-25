@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -8,55 +6,57 @@ public class Bubble_shotter_bar : MonoBehaviour
 {
     [SerializeField] private Image bar; // The Image for the bar
     [SerializeField] private float growSpeed = 2f; // Speed of bar growth
-    public float maxHeight ; // Maximum height of the bar
-    public float minHeight ; // Minimum height of the bar
-    [SerializeField] private InputActionReference controlActionShoot; // Input for shooting
-    [SerializeField] private InputActionReference controlActionAim; // Input for aiming
+    [SerializeField] private float maxHeight = 300f; // Maximum height of the bar
+    [SerializeField] private float minHeight = 50f; // Minimum height of the bar
 
-    private bool isGrowing = true; // Determines if the bar is growing
-    private bool isStopped = false; // Tracks if the bar has been stopped
-    private float powerLevel = 0f; // Tracks the power level
+    private bool isGrowing = true; // Determines if the bar is growing or shrinking
+    private float powerLevel = 0f;
 
-    public bool shooting;
+    public bool shooting; // Whether the player is shooting
+    public bool aiming;   // Whether the player is aiming
 
-    public float height;
-
-    private void OnEnable()
+    // Called when the aim button is pressed or released
+    public void onAim(InputAction.CallbackContext context)
     {
-        // Enable input actions
-        controlActionShoot.action.Enable();
-        controlActionAim.action.Enable();
+        if (context.started)
+        {
+            aiming = true; // Start aiming
+        }
+        else if (context.canceled)
+        {
+            aiming = false; // Stop aiming
+            ResetBarHeight(); // Reset bar height when aim is released
+        }
     }
 
-    private void OnDisable()
+    // Called when the shoot button is pressed
+    public void onShoot(InputAction.CallbackContext context)
     {
-        // Disable input actions
-        controlActionShoot.action.Disable();
-        controlActionAim.action.Disable();
+        if (context.performed)
+        {
+            shooting = true; // Shooting has occurred
+            DeterminePowerLevel(); // Determine power level based on current bar height
+            ResetBarHeight(); // Reset the bar height after shooting
+            shooting = false; // Reset shooting flag
+        }
     }
 
+    // Called every frame to update the bar
     private void Update()
     {
-        // Check if the player is holding the aim input
-        if (controlActionAim.action.IsPressed())
+        if (aiming)
         {
-            // Call the bar growth-shrink logic
-            bar_up_and_down();
-        }
-        else
-        {
-            // Reset if the aim action is released
-            isStopped = false;
-            ResetBarHeight();
+            // Oscillate the bar up and down when aiming
+            OscillateBar();
         }
     }
 
-    private void bar_up_and_down()
+    private void OscillateBar()
     {
-        if (!isStopped)
+        if (aiming)
         {
-            // Grow and shrink the bar
-             height = bar.rectTransform.sizeDelta.y;
+            float height = bar.rectTransform.sizeDelta.y;
+
             if (isGrowing)
             {
                 height += growSpeed * Time.deltaTime;
@@ -79,20 +79,13 @@ public class Bubble_shotter_bar : MonoBehaviour
             // Apply height changes to the bar's RectTransform
             bar.rectTransform.sizeDelta = new Vector2(bar.rectTransform.sizeDelta.x, height);
         }
-
-        // Stop the bar and calculate the power level when shoot input is pressed
-        if (controlActionShoot.action.WasPressedThisFrame())
-        {
-            isStopped = true; // Stop the bar
-            DeterminePowerLevel(); // Calculate the power level
-            ResetBarHeight();
-        }
     }
 
-    private void DeterminePowerLevel()
+    public void DeterminePowerLevel()
     {
         float height = bar.rectTransform.sizeDelta.y;
 
+        // Determine power level based on the bar's height
         if (height <= minHeight + (maxHeight - minHeight) / 3)
         {
             powerLevel = 10; // Level 1
@@ -109,9 +102,11 @@ public class Bubble_shotter_bar : MonoBehaviour
         // Output the power level
         Debug.Log($"Power Level: {powerLevel}");
     }
-    private void ResetBarHeight()
+
+    // Reset the bar's height to minimum after shooting or when aim is released
+    public void ResetBarHeight()
     {
-        // Reset the bar's height to minimum
         bar.rectTransform.sizeDelta = new Vector2(bar.rectTransform.sizeDelta.x, minHeight);
     }
+
 }

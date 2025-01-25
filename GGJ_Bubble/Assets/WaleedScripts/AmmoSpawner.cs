@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class AmmoSpawner : MonoBehaviour
 {
-    public GameObject[] prefabs;
-    public BoxCollider spawnArea;
-    public float spawnInterval = 2f; 
-    public int maxSpawnCount = 10; 
+    public GameObject[] prefabs; 
+    public BoxCollider spawnArea; 
+    public float minSpawnInterval = 1f;
+    public float maxSpawnInterval = 5f;
 
-    private float timer; // Timer to track spawn intervals
-    private List<GameObject> activePrefabs; // List to track spawned prefabs
+    private float spawnTimer; // Timer to track time until next spawn
+    private float nextSpawnTime; // Randomized time for the next spawn
     [SerializeField] private ReadyManager readyManager;
 
     private void Start()
@@ -23,20 +23,21 @@ public class AmmoSpawner : MonoBehaviour
             Debug.LogError("No prefabs assigned! Please assign at least one prefab.");
         }
 
-        activePrefabs = new List<GameObject>(); // Initialize the list
+        SetRandomSpawnTime(); // Set the initial spawn time
     }
 
     private void Update()
     {
         if (!readyManager.gameStarted) return;
 
-        timer += Time.deltaTime;
+        spawnTimer += Time.deltaTime;
 
-        // Check if it's time to spawn and if we haven't reached the max count
-        if (timer >= spawnInterval && activePrefabs.Count < maxSpawnCount)
+        // Check if it's time to spawn a new item
+        if (spawnTimer >= nextSpawnTime)
         {
             SpawnRandomPrefab();
-            timer = 0f; // Reset timer
+            spawnTimer = 0f; // Reset the timer
+            SetRandomSpawnTime(); // Set a new random spawn interval
         }
     }
 
@@ -44,25 +45,14 @@ public class AmmoSpawner : MonoBehaviour
     {
         if (prefabs.Length > 0 && spawnArea != null)
         {
-            // Get a random position inside the collider bounds
             Vector3 spawnPosition = GetRandomPositionInCollider();
 
-            // Select a random prefab
+            // Select a random prefab to spawn
             int randomIndex = Random.Range(0, prefabs.Length);
             GameObject prefabToSpawn = prefabs[randomIndex];
 
-            // Instantiate the selected prefab at the random position
-            GameObject spawnedPrefab = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
-
-            // Add the spawned prefab to the list
-            activePrefabs.Add(spawnedPrefab);
-
-            // Assign a callback to remove it when picked up
-            AmmoCollectible ammoPickup = spawnedPrefab.GetComponent<AmmoCollectible>();
-            if (ammoPickup != null)
-            {
-                ammoPickup.OnPickedUp += HandleAmmoPickedUp;
-            }
+            // Instantiate the selected prefab
+            Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
         }
     }
 
@@ -70,7 +60,7 @@ public class AmmoSpawner : MonoBehaviour
     {
         Bounds bounds = spawnArea.bounds;
 
-        // Generate random position within bounds
+        // Generate a random position within the bounds of the collider
         float x = Random.Range(bounds.min.x, bounds.max.x);
         float y = Random.Range(bounds.min.y, bounds.max.y);
         float z = Random.Range(bounds.min.z, bounds.max.z);
@@ -78,15 +68,9 @@ public class AmmoSpawner : MonoBehaviour
         return new Vector3(x, y, z);
     }
 
-    private void HandleAmmoPickedUp(GameObject pickedUpPrefab)
+    private void SetRandomSpawnTime()
     {
-        // Remove the prefab from the active list when picked up
-        if (activePrefabs.Contains(pickedUpPrefab))
-        {
-            activePrefabs.Remove(pickedUpPrefab);
-        }
-
-        // Destroy the prefab
-        Destroy(pickedUpPrefab);
+        // Randomize the interval for the next spawn
+        nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
     }
 }
