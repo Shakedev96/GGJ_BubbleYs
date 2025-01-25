@@ -8,8 +8,8 @@ public class Bubble_shotter_bar : MonoBehaviour
 {
     [SerializeField] private Image bar; // The Image for the bar
     [SerializeField] private float growSpeed = 2f; // Speed of bar growth
-    [SerializeField] private float maxHeight = 300f; // Maximum height of the bar
-    [SerializeField] private float minHeight = 50f; // Minimum height of the bar
+    public float maxHeight ; // Maximum height of the bar
+    public float minHeight ; // Minimum height of the bar
     [SerializeField] private InputActionReference controlActionShoot; // Input for shooting
     [SerializeField] private InputActionReference controlActionAim; // Input for aiming
 
@@ -18,6 +18,8 @@ public class Bubble_shotter_bar : MonoBehaviour
     private float powerLevel = 0f; // Tracks the power level
 
     public bool shooting;
+
+    public float height;
 
     private void OnEnable()
     {
@@ -54,7 +56,7 @@ public class Bubble_shotter_bar : MonoBehaviour
         if (!isStopped)
         {
             // Grow and shrink the bar
-            float height = bar.rectTransform.sizeDelta.y;
+             height = bar.rectTransform.sizeDelta.y;
             if (isGrowing)
             {
                 height += growSpeed * Time.deltaTime;
