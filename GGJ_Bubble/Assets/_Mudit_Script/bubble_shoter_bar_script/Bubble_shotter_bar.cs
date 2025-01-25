@@ -6,14 +6,18 @@ public class Bubble_shotter_bar : MonoBehaviour
 {
     [SerializeField] private Image bar; // The Image for the bar
     [SerializeField] private float growSpeed = 2f; // Speed of bar growth
-    [SerializeField] private float maxHeight = 300f; // Maximum height of the bar
-    [SerializeField] private float minHeight = 50f; // Minimum height of the bar
+    //mudit changed below
+    public float maxHeight ; // Maximum height of the bar
+    public float minHeight ; // Minimum height of the bar
 
     private bool isGrowing = true; // Determines if the bar is growing or shrinking
     private float powerLevel = 0f;
 
     public bool shooting; // Whether the player is shooting
     public bool aiming;   // Whether the player is aiming
+
+
+    public float height; //mudit changed
 
     // Called when the aim button is pressed or released
     public void onAim(InputAction.CallbackContext context)
@@ -55,7 +59,7 @@ public class Bubble_shotter_bar : MonoBehaviour
     {
         if (aiming)
         {
-            float height = bar.rectTransform.sizeDelta.y;
+             height = bar.rectTransform.sizeDelta.y;
 
             if (isGrowing)
             {
