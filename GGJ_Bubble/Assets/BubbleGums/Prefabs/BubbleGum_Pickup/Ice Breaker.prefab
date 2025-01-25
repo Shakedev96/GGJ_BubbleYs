@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3478967612796542922}
   - component: {fileID: 8909441497404656491}
   - component: {fileID: 7030280837470387483}
-  - component: {fileID: 3088440584473114874}
+  - component: {fileID: 143395637265076019}
   m_Layer: 0
   m_Name: Ice Breaker
   m_TagString: AmmoCollectible
@@ -108,7 +108,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3088440584473114874
+--- !u!114 &143395637265076019
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

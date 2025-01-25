@@ -1063,6 +1063,7 @@ GameObject:
   - component: {fileID: 2394658570813415360}
   - component: {fileID: 4832746725872881054}
   - component: {fileID: 7278418488792369616}
+  - component: {fileID: 6187766484090701479}
   m_Layer: 0
   m_Name: PlayerCyan
   m_TagString: Player
@@ -1279,6 +1280,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 787fcf3b-375a-4ff3-a961-8fb43e4c9c3a
     m_ActionName: 'Player/Switch[/XInputControllerWindows/rightShoulder,/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6187766484090701479}
+        m_TargetAssemblyTypeName: Bubble_shotter_bar, Assembly-CSharp
+        m_MethodName: onAim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 19e5f761-a9a4-4737-9e00-004a43083cee
+    m_ActionName: 'Player/Aim[/Mouse/rightButton,/XInputControllerWindows1/leftTrigger]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1360,6 +1377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pMove: {fileID: 8114717191038190035}
   anim: {fileID: 2394658570813415360}
+  PA: {fileID: 0}
 --- !u!114 &7278418488792369616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1379,6 +1397,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6e29537423c24c4f8aefff60147c2bc, type: 2}
   currentWeaponIndex: 0
   shootPoint: {fileID: 991744134391717618}
+--- !u!114 &6187766484090701479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307791707376314013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7792352a6cf9fb6428f35f5b20c12036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bar: {fileID: 0}
+  growSpeed: 600
+  maxHeight: 400
+  minHeight: 40
+  isStopped: 0
+  shooting: 0
+  amming: 0
 --- !u!1 &8355676863043886482
 GameObject:
   m_ObjectHideFlags: 0

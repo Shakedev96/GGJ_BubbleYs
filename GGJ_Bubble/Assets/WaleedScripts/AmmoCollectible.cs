@@ -23,7 +23,6 @@ public class AmmoCollectible : MonoBehaviour
                     // Trigger any OnPickedUp event and destroy the collectible
                     OnPickedUp?.Invoke(gameObject);
                     Debug.Log("Ammo +1 for " + weaponName);
-                    Destroy(gameObject);
                 }
                 else
                 {

@@ -19,7 +19,6 @@ MonoBehaviour:
   speed: 15
   baseDamage: 5
   destroyTime: 4
-  currentAmmo: 2
   slowsPlayer: 1
   slowAmount: 0.3
   areaDamage: 0
