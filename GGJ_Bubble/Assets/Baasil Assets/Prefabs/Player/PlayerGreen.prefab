@@ -1303,7 +1303,7 @@ MonoBehaviour:
   groundCheckDistance: 0
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   dashForce: 150
   dashDuration: 0.2
   dashCooldown: 1
