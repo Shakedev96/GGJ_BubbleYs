@@ -9,7 +9,6 @@ public class BubbleGums : ScriptableObject
     public float speed;
     public int baseDamage;
     public float destroyTime;
-    public int currentAmmo;
 
     // Special Effects
     public bool slowsPlayer; // If true, slows down the player

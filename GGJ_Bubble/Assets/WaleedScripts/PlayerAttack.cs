@@ -42,10 +42,11 @@ public class PlayerAttack : MonoBehaviour
             currentWeaponIndex = (currentWeaponIndex + 1) % 4; // Wraps around since there are 4 weapons
 
             // Check if the current weapon has ammo
-            if (CurrentWeapon.currentAmmo > 0)
-            {
-                break; // Exit the loop if the weapon has ammo
-            }
+            //if (CurrentWeapon.currentAmmo > 0)
+            //{
+            //     // Exit the loop if the weapon has ammo
+            //}
+            break;
 
             // If we've looped through all weapons, stay on the initial weapon
             if (currentWeaponIndex == initialIndex)
@@ -62,7 +63,7 @@ public class PlayerAttack : MonoBehaviour
     //Shoot
     private void Shoot()
     {
-        if (CurrentWeapon != null && CurrentWeapon.projectilePrefab != null && CurrentWeapon.currentAmmo <= maxAmmo && CurrentWeapon.currentAmmo > 0)
+        if (CurrentWeapon != null && CurrentWeapon.projectilePrefab != null )  //&& CurrentWeapon.currentAmmo <= maxAmmo && CurrentWeapon.currentAmmo > 0
         {
             // Instantiate the projectile at the shoot point and apply its rotation
             GameObject projectile = Instantiate(CurrentWeapon.projectilePrefab, shootPoint.position, shootPoint.rotation);
@@ -76,7 +77,6 @@ public class PlayerAttack : MonoBehaviour
 
             // Set next fire time based on fire rate
             nextFireTime = Time.time + 1f / CurrentWeapon.fireRate;
-            CurrentWeapon.currentAmmo--;
         }
         else
         {

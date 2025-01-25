@@ -1159,6 +1159,8 @@ GameObject:
   - component: {fileID: -4035124581372805067}
   - component: {fileID: 2378493451994028883}
   - component: {fileID: -3490163392480686405}
+  - component: {fileID: 5970636993726095617}
+  - component: {fileID: 1153625580473061213}
   m_Layer: 0
   m_Name: PlayerYellow
   m_TagString: Player
@@ -1394,6 +1396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   canMove: 1
+  moveInput: {x: 0, y: 0}
   rotationSmoothTime: 0.1
   jumpForce: 20
   isGrounded: 0
@@ -1401,10 +1404,11 @@ MonoBehaviour:
   groundCheckDistance: 0
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   dashForce: 150
   dashDuration: 0.2
   dashCooldown: 1
+  isDashing: 0
 --- !u!114 &-4035124581372805067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,6 +1458,42 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6e29537423c24c4f8aefff60147c2bc, type: 2}
   currentWeaponIndex: 0
   shootPoint: {fileID: 4370411923161288902}
+--- !u!95 &5970636993726095617
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307791707376314013}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: a06f322c6a9a09d4eb83802b78ac07fe, type: 3}
+  m_Controller: {fileID: 9100000, guid: 9cc3861688c7147f6a45f1a8d630f081, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1153625580473061213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307791707376314013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed3d24ff026b24c5f99f7caa5642ab91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pMove: {fileID: 8114717191038190035, guid: 1a1ece82b2045614aa51fa7f33430f65, type: 3}
+  anim: {fileID: 2394658570813415360, guid: 1a1ece82b2045614aa51fa7f33430f65, type: 3}
 --- !u!1 &8620507451334464078
 GameObject:
   m_ObjectHideFlags: 0

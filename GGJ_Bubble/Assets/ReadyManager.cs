@@ -15,7 +15,7 @@ public class ReadyManager : MonoBehaviour
 
     private bool isCountdownActive = false;
     private bool[] hasBeenCounted; // Tracks whether each player has been counted
-    private bool gameStarted = false; // Prevent multiple game starts
+    public bool gameStarted = false; // Prevent multiple game starts
 
 
     private void Update()
