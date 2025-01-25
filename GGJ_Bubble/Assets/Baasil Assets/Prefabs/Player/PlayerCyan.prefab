@@ -1062,7 +1062,6 @@ GameObject:
   - component: {fileID: 7865746839483986200}
   - component: {fileID: 2394658570813415360}
   - component: {fileID: 4832746725872881054}
-  - component: {fileID: 5568718310791575486}
   - component: {fileID: 7278418488792369616}
   m_Layer: 0
   m_Name: PlayerCyan
@@ -1361,23 +1360,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pMove: {fileID: 8114717191038190035}
   anim: {fileID: 2394658570813415360}
---- !u!114 &5568718310791575486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8307791707376314013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41dd32b85f0d42a4089073adb911c8ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 11400000, guid: 62f3cd2056295ed479f4f2e28f057135, type: 2}
-  - {fileID: 11400000, guid: 2546904ea9f3e7a4581d73153a79aac9, type: 2}
-  - {fileID: 11400000, guid: 2aceff376a583964abd4762299a960e1, type: 2}
-  - {fileID: 11400000, guid: c6e29537423c24c4f8aefff60147c2bc, type: 2}
 --- !u!114 &7278418488792369616
 MonoBehaviour:
   m_ObjectHideFlags: 0

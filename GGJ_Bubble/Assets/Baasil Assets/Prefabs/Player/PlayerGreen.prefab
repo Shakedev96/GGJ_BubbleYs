@@ -1128,7 +1128,6 @@ GameObject:
   - component: {fileID: 2888857660597930819}
   - component: {fileID: 5087418450614065683}
   - component: {fileID: 1556172622804850217}
-  - component: {fileID: -4636988990509289448}
   m_Layer: 0
   m_Name: PlayerGreen
   m_TagString: Player
@@ -1445,23 +1444,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6e29537423c24c4f8aefff60147c2bc, type: 2}
   currentWeaponIndex: 0
   shootPoint: {fileID: 4059678850626099382}
---- !u!114 &-4636988990509289448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8307791707376314013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41dd32b85f0d42a4089073adb911c8ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 11400000, guid: 62f3cd2056295ed479f4f2e28f057135, type: 2}
-  - {fileID: 11400000, guid: 2546904ea9f3e7a4581d73153a79aac9, type: 2}
-  - {fileID: 11400000, guid: 2aceff376a583964abd4762299a960e1, type: 2}
-  - {fileID: 11400000, guid: c6e29537423c24c4f8aefff60147c2bc, type: 2}
 --- !u!1 &8342252914700482254
 GameObject:
   m_ObjectHideFlags: 0
