@@ -1,11 +1,8 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public float speed = 5f;
-    private Rigidbody rb;
-    public Camera mainCamera;
-
     public BubbleGums[] weapons; // Assign 4 bubblegums here
     public int currentWeaponIndex = 0;
 
@@ -15,98 +12,51 @@ public class PlayerAttack : MonoBehaviour
     private int currentAmmo;
 
     public BubbleGums CurrentWeapon => weapons[currentWeaponIndex]; // Get current weapon
-    private void Start()
+
+    public void onFire(InputAction.CallbackContext context)
     {
-        rb = GetComponent<Rigidbody>();
+        if(context.performed)
+        {
+            Shoot();
+        }
     }
-
-    private void Update()
+    public void onWeaponSwitch(InputAction.CallbackContext context)
     {
-        //Move
-        TempMove();
-
-        //Aim
-        Aim();
-
-        // Switch Weapon
-        if (Input.GetKeyDown(KeyCode.Q))
+        if(context.performed)
         {
             SwitchWeapon();
         }
-
-        //Shoot
-        if (Input.GetMouseButton(0) && Time.time >= nextFireTime) // Left-click
-        {
-            Shoot();
-        }
-
-        if (Input.GetAxis("Fire1") > 0.1f && Time.time >= nextFireTime) // Gamepad button (Left Trigger)
-        {
-            Shoot();
-        }
-        Debug.Log("Current Weapon : " + CurrentWeapon.name);
-        Debug.Log("Ammo : " + CurrentWeapon.currentAmmo);
     }
 
 
-    //Temporary Movement
-    void TempMove()
-    {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");     
-
-        Vector3 forward = mainCamera.transform.forward;
-        Vector3 right = mainCamera.transform.right;
-
-        forward.y = 0;
-        right.y = 0;
-        forward.Normalize();
-        right.Normalize();
-
-        Vector3 moveDirection = (forward * vertical + right * horizontal).normalized;
-
-        transform.position += moveDirection * speed * Time.deltaTime;
-    }
-
-
-    //Aim
-    void Aim()
-    {
-        var (success,position) = GetMousePosition();
-        if(success)
-        {
-            var direction = position - transform.position;
-
-            direction.y = 0;
-
-            transform.forward = direction;
-        }
-    }
-    private (bool success, Vector3 position) GetMousePosition()
-    {
-        var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-        if(Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
-        {
-            return (success: true, position: hitInfo.point);
-        }
-        else
-        {
-            return (success: false, position: Vector3.zero);
-        }
-    }
 
     //Weapon Switch
     void SwitchWeapon()
     {
-        currentWeaponIndex = (currentWeaponIndex + 1);
+        // Store the initial index to avoid infinite loops
+        int initialIndex = currentWeaponIndex;
 
-        if (currentWeaponIndex >= 4)
+        do
         {
-            currentWeaponIndex = 0;
-        }
+            // Increment the weapon index
+            currentWeaponIndex = (currentWeaponIndex + 1) % 4; // Wraps around since there are 4 weapons
 
-        Debug.Log("Current Weapon : " + CurrentWeapon.weaponName);
+            // Check if the current weapon has ammo
+            if (CurrentWeapon.currentAmmo > 0)
+            {
+                break; // Exit the loop if the weapon has ammo
+            }
+
+            // If we've looped through all weapons, stay on the initial weapon
+            if (currentWeaponIndex == initialIndex)
+            {
+                Debug.LogWarning("No weapons with ammo available!");
+                return;
+            }
+
+        } while (true);
+
+        Debug.Log("Current Weapon: " + CurrentWeapon.weaponName);
     }
 
     //Shoot
