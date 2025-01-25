@@ -10,7 +10,7 @@ public class PlayerWeaponManager : MonoBehaviour
     {
         foreach (BubbleGums weapon in weapons)
         {
-            weapon.currentAmmo = 2; // Initialize ammo count
+            //weapon.currentAmmo = 2; // Initialize ammo count
         }
     }
 
@@ -21,15 +21,15 @@ public class PlayerWeaponManager : MonoBehaviour
         {
             if (weapon.weaponName == weaponName)
             {
-                if (weapon.currentAmmo < MaxAmmo)
-                {
-                    weapon.currentAmmo += 1;
-                    Debug.Log(weapon.weaponName + " ammo increased to " + weapon.currentAmmo);
-                }
-                else
-                {
-                    Debug.Log(weapon.weaponName + " already has max ammo.");
-                }
+                //if () //current ammo from player attack)
+                //{
+                //    //current ammo from player attack += 1;
+                //    Debug.Log(weapon.weaponName + " ammo increased to " + );//currentammo from player attack);
+                //}
+                //else
+                //{
+                //    Debug.Log(weapon.weaponName + " already has max ammo.");
+                //}
                 return;
             }
         }
@@ -42,7 +42,7 @@ public class PlayerWeaponManager : MonoBehaviour
         {
             if (weapon.weaponName == weaponName)
             {
-                return weapon.currentAmmo < MaxAmmo;
+                //return weapon.currentAmmo < MaxAmmo;
             }
         }
         return false; // If weapon is not found, return false
