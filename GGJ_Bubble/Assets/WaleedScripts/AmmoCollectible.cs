@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 public class AmmoCollectible : MonoBehaviour
 {
     public string weaponName;
+    public event Action<GameObject> OnPickedUp;
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -12,13 +14,21 @@ public class AmmoCollectible : MonoBehaviour
 
             if (weaponManager != null)
             {
-                // Add ammo to the corresponding weapon
-                weaponManager.AddAmmo(weaponName);
-            }
+                // Check if ammo can be added before picking up
+                if (weaponManager.CanAddAmmo(weaponName))
+                {
+                    // Add ammo to the corresponding weapon
+                    weaponManager.AddAmmo(weaponName);
 
-            // Destroy the collectible after it's collected
-            Debug.Log("Ammo +1 for " + weaponName);
-            Destroy(gameObject);
+                    // Trigger any OnPickedUp event and destroy the collectible
+                    OnPickedUp?.Invoke(gameObject);
+                    Debug.Log("Ammo +1 for " + weaponName);
+                }
+                else
+                {
+                    Debug.Log("Cannot pick up ammo, max ammo reached for " + weaponName);
+                }
+            }
         }
     }
 }

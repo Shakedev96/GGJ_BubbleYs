@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 5733334677951451910}
   - component: {fileID: 5099164414484664158}
   - component: {fileID: 8097359109657658779}
-  - component: {fileID: 4434020185904456717}
+  - component: {fileID: -5104403029098086159}
   m_Layer: 0
   m_Name: DoubleMintAmmo
-  m_TagString: Untagged
+  m_TagString: AmmoCollectible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,14 +108,14 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4434020185904456717
+--- !u!114 &-5104403029098086159
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3541776341449500839}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f491c1e748e6a344eb516d9457493843, type: 3}
   m_Name: 

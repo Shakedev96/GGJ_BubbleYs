@@ -224,6 +224,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9145516449531008338}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2828625679586289534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4370411923161288902}
+  m_Layer: 0
+  m_Name: Shoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4370411923161288902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828625679586289534}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.796, z: 0.829}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8896293105881170747}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2877385958062951620
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,6 +1157,10 @@ GameObject:
   - component: {fileID: 7715490181309038151}
   - component: {fileID: 8114717191038190035}
   - component: {fileID: -4035124581372805067}
+  - component: {fileID: -3490163392480686405}
+  - component: {fileID: 5970636993726095617}
+  - component: {fileID: 1153625580473061213}
+  - component: {fileID: -6675896551002341639}
   m_Layer: 0
   m_Name: PlayerYellow
   m_TagString: Player
@@ -1147,6 +1182,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4562637381679220376}
+  - {fileID: 4370411923161288902}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &6694600573651677916
@@ -1309,6 +1345,54 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0fff4909-db0e-4820-b718-4c2464f73859
     m_ActionName: 'Player/Dash[/XInputControllerWindows1/buttonEast,/DualShock4GamepadHID/buttonEast,/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3490163392480686405}
+        m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
+        m_MethodName: onFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9bf3a15a-67e3-46fe-8487-f959305eabb0
+    m_ActionName: 'Player/Shoot[/XInputControllerWindows/rightTrigger,/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3490163392480686405}
+        m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
+        m_MethodName: onWeaponSwitch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 787fcf3b-375a-4ff3-a961-8fb43e4c9c3a
+    m_ActionName: 'Player/Switch[/XInputControllerWindows/rightShoulder,/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -6675896551002341639}
+        m_TargetAssemblyTypeName: Bubble_shotter_bar, Assembly-CSharp
+        m_MethodName: onAim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 19e5f761-a9a4-4737-9e00-004a43083cee
+    m_ActionName: 'Player/Aim[/Mouse/rightButton,/XInputControllerWindows1/leftTrigger]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1328,6 +1412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   canMove: 1
+  moveInput: {x: 0, y: 0}
   rotationSmoothTime: 0.1
   jumpForce: 20
   isGrounded: 0
@@ -1335,10 +1420,11 @@ MonoBehaviour:
   groundCheckDistance: 0
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 64
   dashForce: 150
   dashDuration: 0.2
   dashCooldown: 1
+  isDashing: 0
 --- !u!114 &-4035124581372805067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1352,6 +1438,81 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isReady: 0
+--- !u!114 &-3490163392480686405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307791707376314013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dee4cff6d7f056488373b25e9b16302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 11400000, guid: 62f3cd2056295ed479f4f2e28f057135, type: 2}
+  - {fileID: 11400000, guid: 2546904ea9f3e7a4581d73153a79aac9, type: 2}
+  - {fileID: 11400000, guid: 2aceff376a583964abd4762299a960e1, type: 2}
+  - {fileID: 11400000, guid: c6e29537423c24c4f8aefff60147c2bc, type: 2}
+  currentWeaponIndex: 0
+  shootPoint: {fileID: 4370411923161288902}
+--- !u!95 &5970636993726095617
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307791707376314013}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: a06f322c6a9a09d4eb83802b78ac07fe, type: 3}
+  m_Controller: {fileID: 9100000, guid: 9cc3861688c7147f6a45f1a8d630f081, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1153625580473061213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307791707376314013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed3d24ff026b24c5f99f7caa5642ab91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pMove: {fileID: 8114717191038190035, guid: 1a1ece82b2045614aa51fa7f33430f65, type: 3}
+  anim: {fileID: 2394658570813415360, guid: 1a1ece82b2045614aa51fa7f33430f65, type: 3}
+  PA: {fileID: 0}
+--- !u!114 &-6675896551002341639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307791707376314013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7792352a6cf9fb6428f35f5b20c12036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bar: {fileID: 0}
+  growSpeed: 600
+  maxHeight: 400
+  minHeight: 40
+  isStopped: 0
+  shooting: 0
+  amming: 0
 --- !u!1 &8620507451334464078
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimController : MonoBehaviour
-{[SerializeField] private PlayerMovement pMove; // Reference to the PlayerMovement script
-    [SerializeField] private Animator anim;       // Reference to the Animator component
+{
+    [SerializeField] private PlayerMovement pMove; // Reference to the PlayerMovement script
+    [SerializeField] private Animator anim; // Reference to the Animator component
+    [SerializeField] private PlayerAttack PA;
 
     // Animator parameter hashes
     private static readonly int IsJumpHash = Animator.StringToHash("isJump");
@@ -22,6 +24,7 @@ public class AnimController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         pMove = GetComponent<PlayerMovement>();
+        PA = GetComponent<PlayerAttack>();
     }
 
     void Update()
@@ -56,6 +59,9 @@ public class AnimController : MonoBehaviour
             anim.SetBool(IsDashHash, pMove.isDashing);
             wasDashing = pMove.isDashing; // Update the cache
         }
+
     }
+
+
 }
 
