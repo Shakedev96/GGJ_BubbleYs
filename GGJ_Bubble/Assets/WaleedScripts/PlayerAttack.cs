@@ -12,25 +12,53 @@ public class PlayerAttack : MonoBehaviour
     private int[] currentAmmo; // Ammo count for each weapon (tracked locally)
     private const int MaxAmmo = 5; // Maximum ammo for each weapon
 
+    private Animator anim;
+    private Bubble_shotter_bar bubble_Shotter_Bar;
+
+
     public BubbleGums CurrentWeapon => weapons[currentWeaponIndex]; // Get the current weapon
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
+        bubble_Shotter_Bar = GetComponent<Bubble_shotter_bar>();
+
         // Initialize ammo array with starting ammo
         currentAmmo = new int[weapons.Length];
         for (int i = 0; i < weapons.Length; i++)
         {
             currentAmmo[i] = 2; // Set initial ammo to max (5) for all weapons
         }
-    }
 
-    public void onFire(InputAction.CallbackContext context)
+
+    }
+    private void Update()
     {
-        if (context.performed)
+        // Automatically switch weapon if the current one is out of ammo
+        if (currentAmmo[currentWeaponIndex] <= 0)
         {
-            Shoot();
+            SwitchWeapon();
         }
     }
+    
+    public void onFire(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            if(bubble_Shotter_Bar.aiming)
+            {
+                Shoot();
+
+                /*bubble_Shotter_Bar.isStopped = true;*/ // Stop the bar
+                bubble_Shotter_Bar.DeterminePowerLevel(); // Calculate the power level
+                bubble_Shotter_Bar.ResetBarHeight();
+
+            }
+           
+        }
+
+    }
+    
 
     public void onWeaponSwitch(InputAction.CallbackContext context)
     {
@@ -82,11 +110,12 @@ public class PlayerAttack : MonoBehaviour
     // Shooting Logic
     private void Shoot()
     {
-        if (CurrentWeapon != null && CurrentWeapon.projectilePrefab != null)
+        if (CurrentWeapon != null && CurrentWeapon.projectilePrefab != null )
         {
             // Check if the weapon has ammo and if enough time has passed since the last shot
             if (currentAmmo[currentWeaponIndex] > 0 && Time.time >= nextFireTime)
             {
+                
                 // Instantiate the projectile at the shoot point
                 GameObject projectile = Instantiate(CurrentWeapon.projectilePrefab, shootPoint.position, shootPoint.rotation);
 
@@ -100,6 +129,10 @@ public class PlayerAttack : MonoBehaviour
                 // Deduct one ammo and set the next fire time
                 currentAmmo[currentWeaponIndex]--;
                 nextFireTime = Time.time + 1f / CurrentWeapon.fireRate;
+
+                // Handle animation
+                anim.SetTrigger("IsShoot");
+
 
                 Debug.Log($"Shot fired! Remaining ammo for {CurrentWeapon.weaponName}: {currentAmmo[currentWeaponIndex]}");
             }
