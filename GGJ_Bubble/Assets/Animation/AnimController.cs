@@ -6,7 +6,10 @@ public class AnimController : MonoBehaviour
 {
     [SerializeField] private PlayerMovement pMove; // Reference to the PlayerMovement script
     [SerializeField] private Animator anim; // Reference to the Animator component
-    [SerializeField] private PlayerAttack PA;
+    [SerializeField] private float movementBlendSpeed = 0.02f;
+    //private Rigidbody playerRB;
+    
+    //[SerializeField] private PlayerAttack PA;
 
     // Animator parameter hashes
     private static readonly int IsJumpHash = Animator.StringToHash("isJump");
@@ -24,7 +27,8 @@ public class AnimController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         pMove = GetComponent<PlayerMovement>();
-        PA = GetComponent<PlayerAttack>();
+        //playerRB = GetComponent<Rigidbody>();
+        //PA = GetComponent<PlayerAttack>();
     }
 
     void Update()
@@ -34,24 +38,40 @@ public class AnimController : MonoBehaviour
 
     void UpdateAnimationParameters()
     {
+            // Log moveInput.x to debug
+        Debug.Log($"moveInput.x: {pMove.moveInput.x}");
+
         // Update horizontal and vertical parameters only if they change
-        if (pMove.moveInput != lastMoveInput)
-        {
+        
+        
             anim.SetFloat(HorizontalHash, pMove.moveInput.x);
             anim.SetFloat(VerticalHash, pMove.moveInput.y);
-            lastMoveInput = pMove.moveInput; // Update the cache
-        }
+            //lastMoveInput = pMove.moveInput; // Update the cache
+        
 
         // Update jump state
         anim.SetBool(IsJumpHash, !pMove.isGrounded);
 
         // Update running state
-        bool isRunning = Mathf.Abs(pMove.moveInput.y) > 0.1f;
-        anim.SetBool(IsRunHash, isRunning);
+        //bool isRunning = Mathf.Abs(pMove.moveInput.y) > 0.1f;
+        //anim.SetBool(IsRunHash, isRunning);
 
-        // Update strafing states
-        anim.SetBool(RightMoveHash, pMove.moveInput.x > 0.1f);
-        anim.SetBool(LeftMoveHash, pMove.moveInput.x < -0.1f);
+        // Refined strafing states
+       /*  if (pMove.moveInput.x > 0.1f)
+        {
+            anim.SetBool(RightMoveHash, true);
+            anim.SetBool(LeftMoveHash, false); // Ensure the other direction is reset
+        }
+        else if (pMove.moveInput.x < -0.1f)
+        {
+            anim.SetBool(RightMoveHash, false);
+            anim.SetBool(LeftMoveHash, true); // Ensure the other direction is reset
+        }
+        else
+        {
+            anim.SetBool(RightMoveHash, false);
+            anim.SetBool(LeftMoveHash, false); // Reset both if not strafing
+        } */
 
         // Update dashing state only if it changes
         if (pMove.isDashing != wasDashing)
@@ -64,4 +84,11 @@ public class AnimController : MonoBehaviour
 
 
 }
+/*
+void UpdateAnimationParameters()
+{
+    
+}
+
+*/
 

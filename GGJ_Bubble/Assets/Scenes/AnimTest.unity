@@ -283,6 +283,37 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &526915885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 526915886}
+  m_Layer: 0
+  m_Name: MidPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &526915886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526915885}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &604003227
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +406,7 @@ GameObject:
   - component: {fileID: 835226743}
   - component: {fileID: 835226742}
   - component: {fileID: 835226741}
+  - component: {fileID: 835226745}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -500,6 +532,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 38.355, y: 0, z: 0}
+--- !u!114 &835226745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835226740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2a920c5b14a6e441b3d8ee983687a11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxZoom: 80
+  minZoom: 40
+  defaultZoom: 60
+  zoomSpeed: 5
+  distanceThreshold: 10
+  mapCenter: {fileID: 526915886}
 --- !u!1 &852854061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,6 +1144,7 @@ MonoBehaviour:
   playerObjects: []
   playersReady: 0
   countdownTimer: {fileID: 1377857582}
+  gameStarted: 0
 --- !u!4 &1771305701
 Transform:
   m_ObjectHideFlags: 0
@@ -1188,3 +1239,4 @@ SceneRoots:
   - {fileID: 852854064}
   - {fileID: 835226744}
   - {fileID: 1771305701}
+  - {fileID: 526915886}
