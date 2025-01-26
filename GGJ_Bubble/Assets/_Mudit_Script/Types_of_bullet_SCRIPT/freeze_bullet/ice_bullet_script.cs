@@ -9,7 +9,6 @@ public class ice_bullet_script : MonoBehaviour
 
     private HealthManager healthmanager;
     public BubbleGums bubblegums;
-    private Bubble_shotter_bar powerBarlevel;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -20,7 +19,6 @@ public class ice_bullet_script : MonoBehaviour
 
             playermovement = collision.gameObject.GetComponent<PlayerMovement>();
             playerattack = collision.gameObject.GetComponent<PlayerAttack>();
-            powerBarlevel = collision.gameObject.GetComponent<Bubble_shotter_bar>();
 
             playermovement.canMove = false;
             playermovement.Invoke("reseting_the_ismoving_bool_true", 3.2f);
@@ -28,7 +26,7 @@ public class ice_bullet_script : MonoBehaviour
             playerattack.can_shoot = false;
             playerattack.Invoke("reset_shooting_function", 3.2f);
 
-            healthmanager.damageHealth(bubblegums.baseDamage * powerBarlevel.powerLevel);
+            healthmanager.damageHealth( bubblegums.baseDamage);
 
             Destroy(this.gameObject);
         }

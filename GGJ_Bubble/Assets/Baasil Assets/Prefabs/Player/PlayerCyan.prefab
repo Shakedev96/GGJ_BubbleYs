@@ -1385,13 +1385,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8307791707376314013}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 721c28dbfd751204da5f6fbf5954a478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  canMove: 1
+  canMove: 0
   moveInput: {x: 0, y: 0}
   rotationSmoothTime: 0.1
   jumpForce: 20
@@ -1474,7 +1474,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6e29537423c24c4f8aefff60147c2bc, type: 2}
   currentWeaponIndex: 0
   shootPoint: {fileID: 991744134391717618}
-  can_shoot: 1
+  can_shoot: 0
   isShocked: 0
 --- !u!114 &6187766484090701479
 MonoBehaviour:
@@ -1489,10 +1489,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 4531446690040698}
-  growSpeed: 500
+  growSpeed: 600
   maxHeight: 400
   minHeight: 40
-  powerLevel: 0
   shooting: 0
   aiming: 0
   height: 0
@@ -1798,7 +1797,7 @@ Transform:
   m_GameObject: {fileID: 9197217587502773010}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.32, z: 1.84}
+  m_LocalPosition: {x: 0, y: 1.796, z: 0.829}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

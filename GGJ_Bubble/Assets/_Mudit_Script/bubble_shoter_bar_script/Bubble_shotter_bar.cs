@@ -9,10 +9,9 @@ public class Bubble_shotter_bar : MonoBehaviour
     //mudit changed below
     public float maxHeight ; // Maximum height of the bar
     public float minHeight ; // Minimum height of the bar
-    private float checkHeight;
 
     private bool isGrowing = true; // Determines if the bar is growing or shrinking
-    public float powerLevel = 1f;
+    private float powerLevel = 0f;
 
     public bool shooting; // Whether the player is shooting
     public bool aiming;   // Whether the player is aiming
@@ -40,20 +39,15 @@ public class Bubble_shotter_bar : MonoBehaviour
         if (context.performed)
         {
             shooting = true; // Shooting has occurred
+            DeterminePowerLevel(); // Determine power level based on current bar height
             ResetBarHeight(); // Reset the bar height after shooting
             shooting = false; // Reset shooting flag
         }
-    }
-    private void Start()
-    {
-        checkHeight = maxHeight / 3;
     }
 
     // Called every frame to update the bar
     private void Update()
     {
-        DeterminePowerLevel(); // Determine power level based on current bar height
-
         if (aiming)
         {
             // Oscillate the bar up and down when aiming
@@ -96,18 +90,21 @@ public class Bubble_shotter_bar : MonoBehaviour
         float height = bar.rectTransform.sizeDelta.y;
 
         // Determine power level based on the bar's height
-        if (height >= (checkHeight*2) && height<=maxHeight)
+        if (height <= minHeight + (maxHeight - minHeight) / 3)
         {
-            powerLevel = 2f; // Level 1
+            powerLevel = 10; // Level 1
         }
-        else if (height >= checkHeight && height <= (checkHeight * 2))
+        else if (height <= minHeight + 2 * (maxHeight - minHeight) / 3)
         {
-            powerLevel = 1.5f; // Level 2
+            powerLevel = 20; // Level 2
         }
         else
         {
-            powerLevel = 1f; // Level 3
+            powerLevel = 30; // Level 3
         }
+
+        // Output the power level
+        Debug.Log($"Power Level: {powerLevel}");
     }
 
     // Reset the bar's height to minimum after shooting or when aim is released

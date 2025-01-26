@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class normal_bullet : MonoBehaviour
@@ -5,16 +8,12 @@ public class normal_bullet : MonoBehaviour
     private HealthManager healthmanager;
     public BubbleGums bubblegums;
 
-    private Bubble_shotter_bar powerBarlevel;
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             healthmanager = collision.gameObject.GetComponent<HealthManager>();
-            powerBarlevel = collision.gameObject.GetComponent<Bubble_shotter_bar>();
-
-            healthmanager.damageHealth(bubblegums.baseDamage * powerBarlevel.powerLevel);
+            healthmanager.damageHealth(bubblegums.baseDamage);
             Destroy(this.gameObject);
         }
     }

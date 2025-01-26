@@ -1144,9 +1144,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   readyScripts: []
   playerMovement: []
+  playerAttack: []
   playerObjects: []
   playersReady: 0
   countdownTimer: {fileID: 1377857582}
+  playerSpawner: {fileID: 1623785765}
   gameStarted: 0
 --- !u!4 &1771305701
 Transform:
