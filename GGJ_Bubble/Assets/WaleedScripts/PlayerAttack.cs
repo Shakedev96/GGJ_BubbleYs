@@ -15,6 +15,8 @@ public class PlayerAttack : MonoBehaviour
     private Animator anim;
     private Bubble_shotter_bar bubble_Shotter_Bar;
 
+    public bool can_shoot = true;
+
 
     public BubbleGums CurrentWeapon => weapons[currentWeaponIndex]; // Get the current weapon
 
@@ -40,25 +42,29 @@ public class PlayerAttack : MonoBehaviour
             SwitchWeapon();
         }
     }
-    
+
     public void onFire(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (can_shoot)
         {
-            if(bubble_Shotter_Bar.aiming)
+            if (context.performed)
             {
-                Shoot();
+                if (bubble_Shotter_Bar.aiming)
+                {
+                    Shoot();
 
-                /*bubble_Shotter_Bar.isStopped = true;*/ // Stop the bar
-                bubble_Shotter_Bar.DeterminePowerLevel(); // Calculate the power level
-                bubble_Shotter_Bar.ResetBarHeight();
+                    /*bubble_Shotter_Bar.isStopped = true;*/ // Stop the bar
+                    bubble_Shotter_Bar.DeterminePowerLevel(); // Calculate the power level
+                    bubble_Shotter_Bar.ResetBarHeight();
+
+                }
 
             }
-           
         }
 
+
     }
-    
+
 
     public void onWeaponSwitch(InputAction.CallbackContext context)
     {
@@ -110,12 +116,12 @@ public class PlayerAttack : MonoBehaviour
     // Shooting Logic
     private void Shoot()
     {
-        if (CurrentWeapon != null && CurrentWeapon.projectilePrefab != null )
+        if (CurrentWeapon != null && CurrentWeapon.projectilePrefab != null)
         {
             // Check if the weapon has ammo and if enough time has passed since the last shot
             if (currentAmmo[currentWeaponIndex] > 0 && Time.time >= nextFireTime)
             {
-                
+
                 // Instantiate the projectile at the shoot point
                 GameObject projectile = Instantiate(CurrentWeapon.projectilePrefab, shootPoint.position, shootPoint.rotation);
 
@@ -175,4 +181,11 @@ public class PlayerAttack : MonoBehaviour
 
         Debug.LogWarning($"No matching weapon found for collectible: {collectible.weaponName}");
     }
+
+
+    public void reset_shooting_function()
+    {
+        can_shoot = true;
+    }
+
 }

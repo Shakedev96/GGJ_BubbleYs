@@ -13,21 +13,19 @@ public class normal_bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             healthmanager = collision.gameObject.GetComponent<HealthManager>();
-            normal_gum_attack();
+            healthmanager.damageHealth(bubblegums.baseDamage);
+            Destroy(this.gameObject);
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            healthmanager = other.gameObject.GetComponent<HealthManager>();
-            normal_gum_attack();
-        }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Player"))
+    //    {
+    //        healthmanager = other.gameObject.GetComponent<HealthManager>();
+    //        normal_gum_attack();
+    //    }
         
-    }
+    //}
 
-    public void normal_gum_attack()
-    {
-        healthmanager.currentHealth = healthmanager.currentHealth - bubblegums.baseDamage;
-    }
+    
 }

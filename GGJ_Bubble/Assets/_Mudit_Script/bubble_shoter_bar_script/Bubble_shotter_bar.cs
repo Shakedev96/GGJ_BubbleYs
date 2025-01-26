@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Bubble_shotter_bar : MonoBehaviour
 {
-    [SerializeField] private Image bar; // The Image for the bar
+    public Image bar; // The Image for the bar
     [SerializeField] private float growSpeed = 2f; // Speed of bar growth
     //mudit changed below
     public float maxHeight ; // Maximum height of the bar
@@ -109,6 +109,10 @@ public class Bubble_shotter_bar : MonoBehaviour
 
     // Reset the bar's height to minimum after shooting or when aim is released
     public void ResetBarHeight()
+    {
+        bar.rectTransform.sizeDelta = new Vector2(bar.rectTransform.sizeDelta.x, minHeight);
+    }
+    public void Reset_call_another_script()
     {
         bar.rectTransform.sizeDelta = new Vector2(bar.rectTransform.sizeDelta.x, minHeight);
     }

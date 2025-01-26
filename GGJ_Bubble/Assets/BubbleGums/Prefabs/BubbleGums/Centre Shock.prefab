@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2112623233305576072}
   - component: {fileID: 2839677749074416381}
   - component: {fileID: 4823835597635503873}
+  - component: {fileID: 6512860517603301830}
   m_Layer: 0
   m_Name: Centre Shock
   m_TagString: Untagged
@@ -30,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.9300001, z: 0.88}
-  m_LocalScale: {x: 0.37089744, y: 0.37089744, z: 0.37089744}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -65,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3ed0d80401a3be548a53f3f98a6aaef7, type: 2}
+  - {fileID: 2100000, guid: 96b2bc27f2c8b4d9d92c983566d5a72e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -120,3 +121,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c036eeca04acf4399b7f847ee79219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6512860517603301830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4894125228719105130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9f6d32f162c0f49b9a7a27364d672c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubble_shotter_Bar: {fileID: 0}

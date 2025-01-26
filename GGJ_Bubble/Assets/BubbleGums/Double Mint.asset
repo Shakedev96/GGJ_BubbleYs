@@ -16,10 +16,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4350316103495671214, guid: 80de28a1efc329c49b5d3ba9d97ed9c2,
     type: 3}
   fireRate: 4
-  speed: 9
-  baseDamage: 2
+  speed: 10
+  baseDamage: 20
   destroyTime: 5
-  currentAmmo: 2
   slowsPlayer: 0
   slowAmount: 0
   areaDamage: 0

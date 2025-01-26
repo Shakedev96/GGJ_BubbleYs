@@ -198,4 +198,10 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+
+    public void reseting_the_ismoving_bool_true()
+    {
+        canMove = true;
+    }
+
 }

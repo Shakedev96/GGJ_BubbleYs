@@ -12,15 +12,16 @@ public class shock_bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             bubble_shotter_Bar = collision.gameObject.GetComponent<Bubble_shotter_bar>();
-            bubble_shotter_Bar.height = bubble_shotter_Bar.minHeight;
+            bubble_shotter_Bar.Reset_call_another_script();
+            Destroy(this.gameObject);
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            bubble_shotter_Bar = other.gameObject.GetComponent<Bubble_shotter_bar>();
-            bubble_shotter_Bar.height = bubble_shotter_Bar.minHeight;
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Player"))
+    //    {
+    //        bubble_shotter_Bar = other.gameObject.GetComponent<Bubble_shotter_bar>();
+    //        bubble_shotter_Bar.Reset_call_another_script(); 
+    //    }
+    //}
 }

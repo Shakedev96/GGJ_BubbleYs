@@ -4,36 +4,41 @@ using UnityEngine;
 
 public class ice_bullet_script : MonoBehaviour
 {
-    private PlayerMovement playermovement;
-    private PlayerAttack playerattack;
-    
+    [SerializeField] private PlayerMovement playermovement;
+    [SerializeField] private PlayerAttack playerattack;
+
+    private HealthManager healthmanager;
+    public BubbleGums bubblegums;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-           
+
+            healthmanager = collision.gameObject.GetComponent<HealthManager>();
+
             playermovement = collision.gameObject.GetComponent<PlayerMovement>();
             playerattack = collision.gameObject.GetComponent<PlayerAttack>();
-            disabling_the_script();
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-        
-            playermovement = other.gameObject.GetComponent<PlayerMovement>();
-            playerattack = other.gameObject.GetComponent<PlayerAttack>();
-            disabling_the_script();
+
+            playermovement.canMove = false;
+            playermovement.Invoke("reseting_the_ismoving_bool_true", 3.2f);
+
+            playerattack.can_shoot = false;
+            playerattack.Invoke("reset_shooting_function", 3.2f);
+
+            healthmanager.damageHealth( bubblegums.baseDamage);
+
+            Destroy(this.gameObject);
         }
     }
 
-
-   public void disabling_the_script()
-    {
-        playermovement.enabled = false;
-        playerattack.enabled = false;
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Player"))
+    //    {
+    //        // Call FreezePlayer on the freeze manager
+    //        freezeManager.FreezePlayer(other.gameObject);
+    //    }
+    //}
 
 }

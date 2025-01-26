@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2552863446249843300}
   - component: {fileID: 8820854444174746900}
   - component: {fileID: 2748225222638327966}
+  - component: {fileID: 682400866052444020}
   m_Layer: 0
   m_Name: Double Mint
   m_TagString: Untagged
@@ -65,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3589ae19663228e45be0f37ac46c9965, type: 2}
+  - {fileID: 2100000, guid: 8802aa9ba682d4d9fb57e8a317463541, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -120,3 +121,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c036eeca04acf4399b7f847ee79219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &682400866052444020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4350316103495671214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66256e420376eea4a814d6a3f8acdfc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubblegums: {fileID: 11400000, guid: 62f3cd2056295ed479f4f2e28f057135, type: 2}
