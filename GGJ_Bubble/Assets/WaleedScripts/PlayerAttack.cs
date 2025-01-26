@@ -15,7 +15,7 @@ public class PlayerAttack : MonoBehaviour
     private Animator anim;
     private Bubble_shotter_bar bubble_Shotter_Bar;
 
-    public bool can_shoot = true;
+    public bool can_shoot = false;
     public bool isShocked = false;
 
     private HealthManager healthManager;
