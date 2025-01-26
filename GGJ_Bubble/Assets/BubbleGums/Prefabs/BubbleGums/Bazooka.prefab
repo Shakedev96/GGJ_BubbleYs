@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5839357204589545655}
   - component: {fileID: 1826630223244786812}
   - component: {fileID: 5836911220859646484}
+  - component: {fileID: -2487192836608064354}
   m_Layer: 0
   m_Name: Bazooka
   m_TagString: Untagged
@@ -120,3 +121,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c036eeca04acf4399b7f847ee79219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2487192836608064354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935293954063090514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f878d0393f4b2db478994402af648952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Playerss: []
+  bubblegums: {fileID: 11400000, guid: c6e29537423c24c4f8aefff60147c2bc, type: 2}

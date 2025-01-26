@@ -20,7 +20,7 @@ public class PlayerSpawnManager : MonoBehaviour
             Debug.LogError("Please assign at least 4 spawn points and 3 player prefabs in the inspector!");
         }
     }
-    
+
     public void OnPlayerJoined(PlayerInput playerInput)
     {
         // Determine the spawn point index based on the number of players
@@ -47,5 +47,7 @@ public class PlayerSpawnManager : MonoBehaviour
             Debug.LogWarning("More players than spawn points! Consider increasing spawn points.");
         }
     }
+
+
 
 }
