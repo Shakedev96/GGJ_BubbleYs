@@ -7,6 +7,8 @@ public class bazuka_bullet : MonoBehaviour
     public GameObject[] Playerss;
     public BubbleGums bubblegums;
 
+    private Bubble_shotter_bar powerBarlevel;
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject)
@@ -44,9 +46,10 @@ public class bazuka_bullet : MonoBehaviour
 
                 // Example: Apply damage or effect to the player
                 HealthManager playerHealth = hitCollider.GetComponent<HealthManager>();
+                powerBarlevel = hitCollider.gameObject.GetComponent<Bubble_shotter_bar>();
                 if (playerHealth != null)
                 {
-                    playerHealth.damageHealth(bubblegums.baseDamage); // Apply 10 damage as an example
+                    playerHealth.damageHealth(bubblegums.baseDamage * powerBarlevel.powerLevel); // Apply 10 damage as an example
                 }
             }
         }

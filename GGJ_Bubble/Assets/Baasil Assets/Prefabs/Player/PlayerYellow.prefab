@@ -351,7 +351,7 @@ Transform:
   m_GameObject: {fileID: 2828625679586289534}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.796, z: 0.829}
+  m_LocalPosition: {x: 0, y: 1.25, z: 1.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1637,6 +1637,7 @@ MonoBehaviour:
   currentWeaponIndex: 0
   shootPoint: {fileID: 4370411923161288902}
   can_shoot: 1
+  isShocked: 0
 --- !u!95 &5970636993726095617
 Animator:
   serializedVersion: 7
@@ -1673,7 +1674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pMove: {fileID: 8114717191038190035, guid: 1a1ece82b2045614aa51fa7f33430f65, type: 3}
   anim: {fileID: 2394658570813415360, guid: 1a1ece82b2045614aa51fa7f33430f65, type: 3}
-  PA: {fileID: 0}
+  movementBlendSpeed: 0.02
 --- !u!114 &-6675896551002341639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1687,9 +1688,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 6918826549518084309}
-  growSpeed: 600
+  growSpeed: 500
   maxHeight: 400
   minHeight: 40
+  powerLevel: 0
   shooting: 0
   aiming: 0
   height: 0

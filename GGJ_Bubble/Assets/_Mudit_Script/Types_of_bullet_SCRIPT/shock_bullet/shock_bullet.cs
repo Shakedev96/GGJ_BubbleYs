@@ -9,6 +9,7 @@ public class shock_bullet : MonoBehaviour
 
 
     public BubbleGums bubblegums;
+    private Bubble_shotter_bar powerBarlevel;
 
 
     private void OnCollisionEnter(Collision collision)
@@ -17,8 +18,9 @@ public class shock_bullet : MonoBehaviour
         {
             healthmanager = collision.gameObject.GetComponent<HealthManager>();
             playerattack = collision.gameObject.GetComponent<PlayerAttack>();
+            powerBarlevel = collision.gameObject.GetComponent<Bubble_shotter_bar>();
 
-            healthmanager.damageHealth(bubblegums.baseDamage);
+            healthmanager.damageHealth(bubblegums.baseDamage * powerBarlevel.powerLevel);
 
             playerattack.can_shoot = false;
             playerattack.isShocked = true;
