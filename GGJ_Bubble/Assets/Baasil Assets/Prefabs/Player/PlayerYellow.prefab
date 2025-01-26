@@ -1584,13 +1584,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8307791707376314013}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 721c28dbfd751204da5f6fbf5954a478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  canMove: 1
+  canMove: 0
   moveInput: {x: 0, y: 0}
   rotationSmoothTime: 0.1
   jumpForce: 20
@@ -1636,7 +1636,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6e29537423c24c4f8aefff60147c2bc, type: 2}
   currentWeaponIndex: 0
   shootPoint: {fileID: 4370411923161288902}
-  can_shoot: 1
+  can_shoot: 0
+  isShocked: 0
 --- !u!95 &5970636993726095617
 Animator:
   serializedVersion: 7
@@ -1673,7 +1674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pMove: {fileID: 8114717191038190035, guid: 1a1ece82b2045614aa51fa7f33430f65, type: 3}
   anim: {fileID: 2394658570813415360, guid: 1a1ece82b2045614aa51fa7f33430f65, type: 3}
-  PA: {fileID: 0}
+  movementBlendSpeed: 0.02
 --- !u!114 &-6675896551002341639
 MonoBehaviour:
   m_ObjectHideFlags: 0

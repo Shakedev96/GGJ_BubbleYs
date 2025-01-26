@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Move")]
     [SerializeField] private float moveSpeed = 5f; // Movement speed
-    public bool canMove = true;
+    public bool canMove = false;
     private Rigidbody rb;
     private Vector3 moveDirection;
     public Vector2 moveInput; // Stores the movement input
@@ -58,7 +58,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
         {
-            handleJump();
+            if (canMove)
+            {
+                handleJump();
+
+            }
+            
         }
 
 
@@ -68,7 +73,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
         {
-            HandleDash();
+            if (canMove)
+            {
+                HandleDash();
+
+            }
         }
 
     }

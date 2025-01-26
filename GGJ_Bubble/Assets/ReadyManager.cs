@@ -8,14 +8,17 @@ public class ReadyManager : MonoBehaviour
 
     [SerializeField] private ready[] readyScripts;
     [SerializeField] private PlayerMovement[] playerMovement;
+    [SerializeField] private PlayerAttack[] playerAttack;
     [SerializeField] private GameObject[] playerObjects;
 
     [SerializeField] private int playersReady = 0;
     [SerializeField] private TextMeshProUGUI countdownTimer;
+    [SerializeField] private GameObject playerSpawner;
 
     private bool isCountdownActive = false;
     private bool[] hasBeenCounted; // Tracks whether each player has been counted
     public bool gameStarted = false; // Prevent multiple game starts
+
 
 
     private void Update()
@@ -86,12 +89,19 @@ public class ReadyManager : MonoBehaviour
         playersReady = 0; // Reset player-ready counter
         countdownTimer.text = ""; // Clear countdown text
 
+        playerSpawner.SetActive(false); // STOP PLAYER SPAWNING AFTER GAME STARTS
+
         playerMovement = new PlayerMovement[playerObjects.Length];
+        playerAttack = new PlayerAttack[playerObjects.Length];
 
         for (int i = 0; i < playerObjects.Length; i++)
         {
             playerMovement[i] = playerObjects[i].GetComponent<PlayerMovement>();
-            playerMovement[i].enabled = true; // Enable player movement
+            playerAttack[i] = playerObjects[i].GetComponent<PlayerAttack>();
+
+            playerMovement[i].canMove = true; // Enable player movement
+            playerAttack[i].can_shoot = true; // Enable player shotting
+
             readyScripts[i].enabled = false; // Disable ready script
         }
     }
