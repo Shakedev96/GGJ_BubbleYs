@@ -26,7 +26,7 @@ public class PlayerSpawnManager : MonoBehaviour
         // Determine the spawn point index based on the number of players
         int playerIndex = players.Count;
 
-        if (playerIndex < playerPrefabs.Length)
+        if (playerIndex < spawnPoints.Length && playerIndex < playerPrefabs.Length)
         {
             // Set player position to the corresponding spawn point
             playerInput.transform.position = spawnPoints[playerIndex].position;

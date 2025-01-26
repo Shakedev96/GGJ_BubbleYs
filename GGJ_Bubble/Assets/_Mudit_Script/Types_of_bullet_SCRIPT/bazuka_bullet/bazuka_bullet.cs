@@ -11,24 +11,22 @@ public class bazuka_bullet : MonoBehaviour
     {
         if (collision.gameObject)
         {
+           if (bubblegums.areaDamage)
+            {
+                ApplyAreaDamage();
+            }
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject)
+        {
             if (bubblegums.areaDamage)
             {
                 ApplyAreaDamage();
-                Debug.Log("area damage ho rehe hai");
             }
-            Destroy(this.gameObject);
         }
     }
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject)
-    //    {
-    //        if (bubblegums.areaDamage)
-    //        {
-    //            ApplyAreaDamage();
-    //        }
-    //    }
-    //}
 
     private void ApplyAreaDamage()
     {
@@ -47,7 +45,7 @@ public class bazuka_bullet : MonoBehaviour
                 HealthManager playerHealth = hitCollider.GetComponent<HealthManager>();
                 if (playerHealth != null)
                 {
-                    playerHealth.damageHealth( bubblegums.baseDamage); // Apply 10 damage as an example
+                    playerHealth.currentHealth = playerHealth.currentHealth-bubblegums.baseDamage; // Apply 10 damage as an example
                 }
             }
         }

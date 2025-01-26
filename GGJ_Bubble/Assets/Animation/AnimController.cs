@@ -39,7 +39,7 @@ public class AnimController : MonoBehaviour
     void UpdateAnimationParameters()
     {
             // Log moveInput.x to debug
-        //Debug.Log($"moveInput.x: {pMove.moveInput.x}");
+        Debug.Log($"moveInput.x: {pMove.moveInput.x}");
 
         // Update horizontal and vertical parameters only if they change
         

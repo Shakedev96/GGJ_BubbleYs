@@ -16,9 +16,6 @@ public class PlayerAttack : MonoBehaviour
     private Bubble_shotter_bar bubble_Shotter_Bar;
 
     public bool can_shoot = true;
-    public bool isShocked = false;
-
-    private HealthManager healthManager;
 
 
     public BubbleGums CurrentWeapon => weapons[currentWeaponIndex]; // Get the current weapon
@@ -27,7 +24,6 @@ public class PlayerAttack : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         bubble_Shotter_Bar = GetComponent<Bubble_shotter_bar>();
-        healthManager = GetComponent<HealthManager>();
 
         // Initialize ammo array with starting ammo
         currentAmmo = new int[weapons.Length];
@@ -49,23 +45,17 @@ public class PlayerAttack : MonoBehaviour
 
     public void onFire(InputAction.CallbackContext context)
     {
-
-        if (context.performed)
+        if (can_shoot)
         {
-            if (bubble_Shotter_Bar.aiming)
+            if (context.performed)
             {
-                if (can_shoot)
+                if (bubble_Shotter_Bar.aiming)
                 {
                     Shoot();
 
                     /*bubble_Shotter_Bar.isStopped = true;*/ // Stop the bar
                     bubble_Shotter_Bar.DeterminePowerLevel(); // Calculate the power level
                     bubble_Shotter_Bar.ResetBarHeight();
-
-                }
-                else if (isShocked)
-                {
-                    healthManager.damageHealth(10);
 
                 }
 
@@ -84,17 +74,16 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("AmmoCollectible"))
+        if (collision.CompareTag("AmmoCollectible"))
         {
-            AmmoCollectible collectible = collision.gameObject.GetComponent<AmmoCollectible>();
+            AmmoCollectible collectible = collision.GetComponent<AmmoCollectible>();
             if (collectible != null)
             {
                 CollectAmmo(collectible);
             }
         }
-
     }
 
     // Weapon Switch Logic
@@ -197,8 +186,6 @@ public class PlayerAttack : MonoBehaviour
     public void reset_shooting_function()
     {
         can_shoot = true;
-        isShocked = false;
-
     }
 
 }
