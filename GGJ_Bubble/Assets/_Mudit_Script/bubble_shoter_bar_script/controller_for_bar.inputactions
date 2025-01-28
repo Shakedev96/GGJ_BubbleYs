@@ -1,0 +1,54 @@
+{
+    "name": "controller_for_bar",
+    "maps": [
+        {
+            "name": "controller_for_BAR",
+            "id": "a44ff566-fdba-4223-94cc-9e7a11e83fee",
+            "actions": [
+                {
+                    "name": "shoot",
+                    "type": "Button",
+                    "id": "ab38527a-461c-4c37-b0c4-031918628ada",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Aim",
+                    "type": "Button",
+                    "id": "0a48d9c7-8a8a-4ff2-8a41-b381c7590ff4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c74a1216-e487-4750-8265-2e72fed0496e",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c3266203-d020-4e38-b455-565c96db4087",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
