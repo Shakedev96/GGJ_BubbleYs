@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Move")]
     [SerializeField] private float moveSpeed = 5f; // Movement speed
     public bool canMove = true;
+    private SkinnedMeshRenderer meshRenderer;
+    [SerializeField] private Material defaultMat, iceMat;
+
     private Rigidbody rb;
     private Vector3 moveDirection;
     public Vector2 moveInput; // Stores the movement input
@@ -38,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
     }
 
@@ -198,10 +201,20 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public void IsFrozen()
+    {
+        meshRenderer.material = iceMat;
 
+
+    }
+    public void ResetFreeze()
+    {
+        meshRenderer.material = defaultMat;
+    }
     public void reseting_the_ismoving_bool_true()
     {
         canMove = true;
+        
     }
 
 }

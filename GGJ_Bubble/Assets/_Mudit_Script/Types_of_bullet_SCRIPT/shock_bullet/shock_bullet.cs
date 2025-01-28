@@ -7,6 +7,7 @@ public class shock_bullet : MonoBehaviour
     private HealthManager healthmanager;
     private PlayerAttack playerattack;
 
+     
 
     public BubbleGums bubblegums;
     private Bubble_shotter_bar powerBarlevel;
@@ -24,6 +25,10 @@ public class shock_bullet : MonoBehaviour
 
             playerattack.can_shoot = false;
             playerattack.isShocked = true;
+            playerattack.IsShocked();
+
+            playerattack.Invoke("ResetMat",5f);
+
             playerattack.Invoke("reset_shooting_function", 5f);
 
 
@@ -38,4 +43,8 @@ public class shock_bullet : MonoBehaviour
     //        bubble_shotter_Bar.Reset_call_another_script(); 
     //    }
     //}
+    private void TargetShock()
+    {
+
+    }
 }

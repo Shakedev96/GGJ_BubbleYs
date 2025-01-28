@@ -1525,6 +1525,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   canMove: 1
+  defaultMat: {fileID: 2100000, guid: bb3ebfe2f116b3b4a8ad57f899a26d1b, type: 2}
+  iceMat: {fileID: 2100000, guid: 2d7279dfe201143afbbd104467a55d0c, type: 2}
   moveInput: {x: 0, y: 0}
   rotationSmoothTime: 0.1
   jumpForce: 20
@@ -1607,6 +1609,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6e29537423c24c4f8aefff60147c2bc, type: 2}
   currentWeaponIndex: 0
   shootPoint: {fileID: 7386143009522299518}
+  defMat: {fileID: 2100000, guid: bb3ebfe2f116b3b4a8ad57f899a26d1b, type: 2}
+  sparkMat: {fileID: 2100000, guid: 96b2bc27f2c8b4d9d92c983566d5a72e, type: 2}
   can_shoot: 1
   isShocked: 0
 --- !u!114 &-5354195313296846901

@@ -10,6 +10,7 @@ public class ice_bullet_script : MonoBehaviour
     private HealthManager healthmanager;
     public BubbleGums bubblegums;
     private Bubble_shotter_bar powerBarlevel;
+    
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -25,6 +26,10 @@ public class ice_bullet_script : MonoBehaviour
             playermovement.canMove = false;
             playermovement.Invoke("reseting_the_ismoving_bool_true", 3.2f);
 
+            playermovement.IsFrozen();
+
+            playermovement.Invoke("ResetFreeze", 3.2f);
+            
             playerattack.can_shoot = false;
             playerattack.Invoke("reset_shooting_function", 3.2f);
 

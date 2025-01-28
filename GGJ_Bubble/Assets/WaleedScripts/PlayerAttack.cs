@@ -12,6 +12,10 @@ public class PlayerAttack : MonoBehaviour
     private int[] currentAmmo; // Ammo count for each weapon (tracked locally)
     private const int MaxAmmo = 5; // Maximum ammo for each weapon
 
+    //Change made by Abhishek
+    private SkinnedMeshRenderer sparkRender;
+    [SerializeField] private Material defMat, sparkMat;
+
     private Animator anim;
     private Bubble_shotter_bar bubble_Shotter_Bar;
 
@@ -29,6 +33,7 @@ public class PlayerAttack : MonoBehaviour
         bubble_Shotter_Bar = GetComponent<Bubble_shotter_bar>();
 
         healthManager = GetComponent<HealthManager>();
+        sparkRender = GetComponentInChildren<SkinnedMeshRenderer>();
 
         // Initialize ammo array with starting ammo
         currentAmmo = new int[weapons.Length];
@@ -196,6 +201,17 @@ public class PlayerAttack : MonoBehaviour
         }
 
         Debug.LogWarning($"No matching weapon found for collectible: {collectible.weaponName}");
+    }
+
+    public void IsShocked()
+    {
+        sparkRender.material = sparkMat;
+
+
+    }
+    public void ResetMat()
+    {
+        sparkRender.material = defMat;
     }
 
 
