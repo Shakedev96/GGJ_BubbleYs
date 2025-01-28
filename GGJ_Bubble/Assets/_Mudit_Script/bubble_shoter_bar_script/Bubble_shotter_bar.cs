@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Bubble_shotter_bar : MonoBehaviour
 {
-    public Image bar; // The Image for the bar
+    public RawImage bar; // The Image for the bar
     [SerializeField] private float growSpeed = 2f; // Speed of bar growth
     //mudit changed below
     public float maxHeight ; // Maximum height of the bar

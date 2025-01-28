@@ -52,19 +52,19 @@ public class UI_scene_changer_and_allthat : MonoBehaviour
     {
         mainmenu_canvas.SetActive(false);
         level_and_number_of_player_selection_canvas.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(level_selection_button_1);
+        //EventSystem.current.SetSelectedGameObject(level_selection_button_1);
     }
     public void selection_back_tomenu()
     {
         mainmenu_canvas.SetActive(true);
         level_and_number_of_player_selection_canvas.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(main_menu_startbutton);
+        //EventSystem.current.SetSelectedGameObject(main_menu_startbutton);
     }
     public void setting()
     {
         mainmenu_canvas.SetActive(false) ;
         setting_canvas.SetActive(true) ;
-        EventSystem.current.SetSelectedGameObject(setting_button);
+        //EventSystem.current.SetSelectedGameObject(setting_button);
     }
     public void setting_back_to_Mainmenu()
     {
@@ -91,27 +91,38 @@ public class UI_scene_changer_and_allthat : MonoBehaviour
     {
         setting_canvas.SetActive(false) ;
         controlls.SetActive(true) ;
-        EventSystem.current.SetSelectedGameObject(countroller_setting_button);
+        //EventSystem.current.SetSelectedGameObject(countroller_setting_button);
     }
     public void sound_changer()
     {
         sound.SetActive(true );
         setting_canvas.SetActive(false );
-        EventSystem.current.SetSelectedGameObject(sound_setting_button);
+        //EventSystem.current.SetSelectedGameObject(sound_setting_button);
     }
 
     public void controlls_back_to_setting()
     {
         setting_canvas.SetActive(true);
         controlls.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(setting_button);
+        //EventSystem.current.SetSelectedGameObject(setting_button);
     }
 
     public void sound_back_to_setting()
     {
         sound.SetActive(false);
         setting_canvas.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(setting_button);
+        //EventSystem.current.SetSelectedGameObject(setting_button);
+    }
+
+    public void levelselect(int scene_changing_number)
+    {
+        SceneManager.LoadScene(scene_changing_number);
+    }
+
+    public void random_level_select()
+    {
+        int randomnum = Random.Range(1, 3);
+        levelselect(randomnum);
     }
 
 }

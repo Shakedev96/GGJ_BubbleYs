@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ReadyManager : MonoBehaviour
 {
-
+    [SerializeField] private GameObject winchecker_obj;
     [SerializeField] private ready[] readyScripts;
     [SerializeField] private PlayerMovement[] playerMovement;
     [SerializeField] private PlayerAttack[] playerAttack;
@@ -19,7 +19,7 @@ public class ReadyManager : MonoBehaviour
     private bool[] hasBeenCounted; // Tracks whether each player has been counted
     public bool gameStarted = false; // Prevent multiple game starts
 
-
+    
 
     private void Update()
     {
@@ -61,6 +61,7 @@ public class ReadyManager : MonoBehaviour
     // Countdown coroutine
     private IEnumerator StartCountdown()
     {
+
         isCountdownActive = true;
 
         int countdownValue = 3;
@@ -90,6 +91,7 @@ public class ReadyManager : MonoBehaviour
         countdownTimer.text = ""; // Clear countdown text
 
         playerSpawner.SetActive(false); // STOP PLAYER SPAWNING AFTER GAME STARTS
+        winchecker_obj.SetActive(true);
 
         playerMovement = new PlayerMovement[playerObjects.Length];
         playerAttack = new PlayerAttack[playerObjects.Length];
@@ -102,6 +104,7 @@ public class ReadyManager : MonoBehaviour
             playerMovement[i].canMove = true; // Enable player movement
             playerAttack[i].can_shoot = true; // Enable player shotting
 
+ 
             readyScripts[i].enabled = false; // Disable ready script
         }
     }
