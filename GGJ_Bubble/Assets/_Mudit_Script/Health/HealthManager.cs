@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HealthManager : MonoBehaviour
 {
 
-    //[SerializeField] private Image healthBar;
+    [SerializeField] private Image healthBar;
     [SerializeField] private float maxHealth;
 
     public float currentHealth;
@@ -58,7 +58,7 @@ public class HealthManager : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         // Set Bar
-        //healthBar.fillAmount = currentHealth / maxHealth;
+        healthBar.fillAmount = currentHealth / maxHealth;
 
     }
 

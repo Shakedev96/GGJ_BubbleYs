@@ -1,15 +1,23 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public TextMeshProUGUI selected_ammow_text;
+
+    public GameObject bubble_UI;
+    public GameObject freeze_UI;
+    public GameObject shock_UI;
+    public GameObject bazooka_UI;
+
     public BubbleGums[] weapons; // Assign 4 bubblegums here
     public int currentWeaponIndex = 0;
 
     public Transform shootPoint; // The point from which the bullet is shot
     private float nextFireTime = 0f;
 
-    private int[] currentAmmo; // Ammo count for each weapon (tracked locally)
+    public int[] currentAmmo; // Ammo count for each weapon (tracked locally)
     private const int MaxAmmo = 5; // Maximum ammo for each weapon
 
     private Animator anim;
@@ -20,6 +28,10 @@ public class PlayerAttack : MonoBehaviour
 
     private HealthManager healthManager;
 
+    //render change
+    private SkinnedMeshRenderer sparkRender;
+    [SerializeField] private Material defMat, sparkMat;
+
 
     public BubbleGums CurrentWeapon => weapons[currentWeaponIndex]; // Get the current weapon
 
@@ -27,6 +39,8 @@ public class PlayerAttack : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         bubble_Shotter_Bar = GetComponent<Bubble_shotter_bar>();
+
+        sparkRender = GetComponentInChildren<SkinnedMeshRenderer>();
 
         healthManager = GetComponent<HealthManager>();
 
@@ -36,6 +50,8 @@ public class PlayerAttack : MonoBehaviour
         {
             currentAmmo[i] = 2; // Set initial ammo to max (5) for all weapons
         }
+
+        update_ammow_ui();
 
 
     }
@@ -112,6 +128,9 @@ public class PlayerAttack : MonoBehaviour
             // Increment the weapon index and wrap around if necessary
             currentWeaponIndex = (currentWeaponIndex + 1) % weapons.Length;
 
+
+            update_ammow_ui();
+
             // Exit the loop if the selected weapon has ammo
             if (currentAmmo[currentWeaponIndex] > 0)
             {
@@ -152,6 +171,8 @@ public class PlayerAttack : MonoBehaviour
                 currentAmmo[currentWeaponIndex]--;
                 nextFireTime = Time.time + 1f / CurrentWeapon.fireRate;
 
+                update_ammow_ui();
+
                 // Handle animation
                 anim.SetTrigger("IsShoot");
 
@@ -184,6 +205,7 @@ public class PlayerAttack : MonoBehaviour
                 if (currentAmmo[i] < MaxAmmo)
                 {
                     currentAmmo[i]++;
+                    update_ammow_ui();
                     Debug.Log($"Collected ammo for {weapons[i].weaponName}. Current ammo: {currentAmmo[i]}");
                     Destroy(collectible.gameObject); // Destroy the collectible
                 }
@@ -204,5 +226,59 @@ public class PlayerAttack : MonoBehaviour
         can_shoot = true;
         isShocked = false;
     }
+
+
+    private void update_ammow_ui()
+    {
+        selected_ammow_text.text = currentAmmo[currentWeaponIndex].ToString();
+        if (currentWeaponIndex == 0)
+        {
+
+            bubble_UI.SetActive(true);
+            freeze_UI.SetActive(false);
+            shock_UI.SetActive(false);
+            bazooka_UI.SetActive(false);
+
+        }
+        else if (currentWeaponIndex == 1)
+        {
+
+            bubble_UI.SetActive(false);
+            freeze_UI.SetActive(true);
+            shock_UI.SetActive(false);
+            bazooka_UI.SetActive(false);
+
+        }
+        else if (currentWeaponIndex == 2)
+        {
+
+            bubble_UI.SetActive(false);
+            freeze_UI.SetActive(false);
+            shock_UI.SetActive(true);
+            bazooka_UI.SetActive(false);
+
+        }
+        else if (currentWeaponIndex == 3)
+        {
+
+            bubble_UI.SetActive(false);
+            freeze_UI.SetActive(false);
+            shock_UI.SetActive(false);
+            bazooka_UI.SetActive(true);
+
+        }
+    }
+
+    public void IsShocked()
+    {
+        sparkRender.material = sparkMat;
+
+
+    }
+    public void ResetMat()
+    {
+        sparkRender.material = defMat;
+    }
+
 
 }

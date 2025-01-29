@@ -22,8 +22,12 @@ public class shock_bullet : MonoBehaviour
 
             playerattack.can_shoot = false;
             playerattack.isShocked = true;
+            playerattack.IsShocked();
+
+            playerattack.Invoke("ResetMat", 5f);
             playerattack.Invoke("reset_shooting_function", 5f);
 
+           
 
             Destroy(this.gameObject);
         }

@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Build.Content;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,9 +33,15 @@ public class PlayerMovement : MonoBehaviour
     private float dashTimeElapsed = 0f; // Tracks time passed during the dash
     private Vector3 dashDirection; // Direction of the dash
 
+    [Header("Render Effects")]
+    private SkinnedMeshRenderer meshRenderer;
+    [SerializeField] private Material defaultMat, iceMat;
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
 
     }
@@ -205,6 +209,16 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position - new Vector3(0, groundCheckDistance, 0), groundCheckRadius);
 
+    }
+
+    public void IsFrozen()
+    {
+        meshRenderer.material = iceMat;
+
+    }
+    public void ResetFreeze()
+    {
+        meshRenderer.material = defaultMat;
     }
 
 
