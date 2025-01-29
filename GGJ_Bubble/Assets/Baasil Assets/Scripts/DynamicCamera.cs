@@ -4,68 +4,144 @@ using UnityEngine;
 
 public class DynamicCamera : MonoBehaviour
 {
-    [Header("Zoom Settings")]
-    [SerializeField] private float maxZoom = 80f; // Maximum FOV when players are far
-    [SerializeField] private float minZoom = 40f; // Minimum FOV when players are close
-    [SerializeField] private float defaultZoom = 60f; // Default FOV when no players
-    [SerializeField] private float zoomSpeed = 5f; // Speed of zoom adjustment
-    [SerializeField] private float distanceThreshold = 10f; // Distance at which the zoom adjusts
+    //[Header("Follow Settings")]
+    //[SerializeField] private float followSpeed = 5f; // Speed at which the camera moves while maintaining offset
 
-    [Header("Player Settings")]
-    [SerializeField] private Transform mapCenter; // The center point of the map
-    private List<GameObject> playerObjects = new List<GameObject>(); // List of player GameObjects
+    //[Header("Player Settings")]
+    //private List<GameObject> playerObjects = new List<GameObject>(); // List of player GameObjects
 
-    private Camera cam;
+    //private void LateUpdate()
+    //{
+    //    if (playerObjects.Count == 0) return; // Do nothing if no players
 
-    private void Awake()
-    {
-        cam = GetComponent<Camera>();
-        cam.fieldOfView = defaultZoom; // Set the camera to default zoom at start
-    }
+    //    MoveCamera();
+    //}
+
+    //private void MoveCamera()
+    //{
+    //    if (playerObjects.Count > 1)
+    //    {
+    //        // If 2 or more players, move the camera to look at their midpoint
+    //        Vector3 targetPosition = GetAveragePlayerPosition();
+    //        targetPosition.y = transform.position.y; // Maintain original Y position
+    //        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * followSpeed);
+
+    //    }
+
+    //}
+
+    //private Vector3 GetAveragePlayerPosition()
+    //{
+    //    Vector3 sumPosition = Vector3.zero;
+    //    int validPlayers = 0;
+
+    //    foreach (GameObject player in playerObjects)
+    //    {
+    //        if (player != null)
+    //        {
+    //            sumPosition += new Vector3(player.transform.position.x, 0, player.transform.position.z); // Ignore Y
+    //            validPlayers++;
+    //        }
+    //    }
+
+    //    Vector3 averagePosition = sumPosition / validPlayers;
+    //    averagePosition.y = transform.position.y; // Keep the camera's current Y
+
+    //    return averagePosition;
+    //}
+
+    //// Called when a new player joins
+   
+
+
+    //--------------------------------------------------------------------Mudit---script----starts---here----------------------------------------------
+
+    public GameObject[] ALL_The_Player;
+    public Camera Main_camera;
+    Vector3 centerPoint;
+
+    public float minFOV; // Minimum field of view (zoomed in)
+    public float maxFOV; // Maximum field of view (zoomed out)
+    public float zoomSpeed ; // Speed of zoom
+
+    public float zoomDistanceThreshold ; // Distance threshold for zooming
+
 
     private void LateUpdate()
     {
-        // If no players, keep the FOV at default
-        if (playerObjects.Count == 0)
-        {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, defaultZoom, Time.deltaTime * zoomSpeed);
-            return;
-        }
+        centerPoint = FindCenterPoint(ALL_The_Player);
 
-        // Calculate the maximum distance of players from the map center
-        float maxDistance = GetMaxPlayerDistance();
+        transform.LookAt(centerPoint);
 
-        // Adjust FOV based on the maximum distance
-        float targetFOV = Mathf.Lerp(minZoom, maxZoom, maxDistance / distanceThreshold);
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, Time.deltaTime * zoomSpeed);
+        // Calculate the distance between the players
+        float playerDistance = CalculatePlayerDistance();
+
+        // Adjust the camera's Field of View (FOV) based on distance
+        AdjustCameraZoom(playerDistance);
+
+        //Debug.LogAssertion(centerPoint);
     }
 
-    private float GetMaxPlayerDistance()
+    Vector3 FindCenterPoint(GameObject[] objects)
     {
-        float maxDistance = 0f;
-
-        foreach (GameObject player in playerObjects)
+        if (objects == null || objects.Length == 0)
         {
-            if (player != null) // Ensure player still exists
-            {
-                float distance = Vector3.Distance(player.transform.position, mapCenter.position);
-                maxDistance = Mathf.Max(maxDistance, distance);
-            }
+            Debug.LogWarning("No objects provided.");
+            return Vector3.zero;
         }
 
-        return maxDistance;
+        Vector3 sum = Vector3.zero;
+
+        // Sum the positions of all GameObjects
+        foreach (var obj in objects)
+        {
+            sum += obj.transform.position;
+        }
+
+        // Return the average position (center point)
+        return sum / objects.Length;
     }
 
     public void UpdatePlayerGameObjects()
     {
-        // Refresh the playerObjects list by finding all objects with the "Player" tag
-        playerObjects.Clear(); // Clear the existing list
+        // Find all players with the "Player" tag
         GameObject[] foundPlayers = GameObject.FindGameObjectsWithTag("Player");
 
-        foreach (GameObject player in foundPlayers)
+        // Update the array with the new players
+        ALL_The_Player = new GameObject[foundPlayers.Length];
+        for (int i = 0; i < foundPlayers.Length; i++)
         {
-            playerObjects.Add(player);
+            ALL_The_Player[i] = foundPlayers[i];
         }
     }
+    float CalculatePlayerDistance()
+    {
+        if (ALL_The_Player.Length < 2)
+        {
+            return 0f; // No valid distance if there are fewer than 2 players
+        }
 
+        Vector3 firstPlayerPosition = ALL_The_Player[0].transform.position;
+        Vector3 lastPlayerPosition = ALL_The_Player[ALL_The_Player.Length - 1].transform.position;
+
+        // Calculate the distance between the first and last player
+        return Vector3.Distance(firstPlayerPosition, lastPlayerPosition);
+    }
+
+    void AdjustCameraZoom(float playerDistance)
+    {
+        // If the players are closer than the threshold distance, zoom in
+        if (playerDistance < zoomDistanceThreshold)
+        {
+            Main_camera.fieldOfView = Mathf.Lerp(Main_camera.fieldOfView, minFOV, Time.deltaTime * zoomSpeed);
+        }
+        else // Otherwise, zoom out
+        {
+            Main_camera.fieldOfView = Mathf.Lerp(Main_camera.fieldOfView, maxFOV, Time.deltaTime * zoomSpeed);
+        }
+    }
 }
+
+
+
+
