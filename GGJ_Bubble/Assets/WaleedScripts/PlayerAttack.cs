@@ -32,7 +32,6 @@ public class PlayerAttack : MonoBehaviour
     private SkinnedMeshRenderer sparkRender;
     [SerializeField] private Material defMat, sparkMat;
 
-
     public BubbleGums CurrentWeapon => weapons[currentWeaponIndex]; // Get the current weapon
 
     private void Start()
@@ -68,7 +67,7 @@ public class PlayerAttack : MonoBehaviour
     {
 
 
-        if (context.performed)
+        if (context.canceled)
         {
             if (bubble_Shotter_Bar.aiming)
             {
@@ -141,7 +140,7 @@ public class PlayerAttack : MonoBehaviour
             // If we've looped through all weapons and found no ammo, stay on the initial weapon
             if (currentWeaponIndex == initialIndex)
             {
-                Debug.LogWarning("No weapons with ammo available!");
+                //Debug.LogWarning("No weapons with ammo available!");
                 return;
             }
 
@@ -158,13 +157,16 @@ public class PlayerAttack : MonoBehaviour
             {
 
                 // Instantiate the projectile at the shoot point
-                GameObject projectile = Instantiate(CurrentWeapon.projectilePrefab, shootPoint.position, shootPoint.rotation);
+                GameObject projectile = Instantiate(CurrentWeapon.projectilePrefab, shootPoint.position, transform.rotation);
+                AudioManager.instance.PlayClip(AudioManager.instance.NormalBulletAudio, true, 1f);
 
                 // Initialize the projectile with the current weapon's data
                 var bubblegumProjectile = projectile.GetComponent<BubbleGumsProjectile>();
+
                 if (bubblegumProjectile != null)
                 {
-                    bubblegumProjectile.Initialize(CurrentWeapon); // Pass the data from the selected weapon
+                    bubblegumProjectile.Initialize(CurrentWeapon, bubble_Shotter_Bar.powerLevel);
+
                 }
 
                 // Deduct one ammo and set the next fire time

@@ -8,7 +8,9 @@ public class ready : MonoBehaviour
     private PlayerMovement playerMovement;
     public bool isReady = false;
 
-    [SerializeField] private GameObject playerIndicator;
+    public bool canReady = true;
+
+    public GameObject playerIndicator;
 
     private void Start()
     {
@@ -19,12 +21,15 @@ public class ready : MonoBehaviour
     {
         if (context.performed)
         {
+            if(canReady)
+            {
                 isReady = !isReady;  // Toggle the ready state
 
                 // Enable or disable the indicator based on isReady
 
                 playerIndicator.SetActive(isReady);
 
+            }
 
         }
 

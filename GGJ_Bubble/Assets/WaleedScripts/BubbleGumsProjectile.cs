@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class BubbleGumsProjectile : MonoBehaviour
 {
-    private int damage;
-    private float speed;
+    public int damage;
+    public float speed;
     private float areaRadius;
     private bool causesSlow;
     private bool causesFreeze;
@@ -11,10 +11,14 @@ public class BubbleGumsProjectile : MonoBehaviour
     private float freezeDuration;
     private float destroyTime;
 
+    public float powerSpeed;
+
 
     private BubbleGums weaponData; // Reference to the weapon's data from the ScriptableObject
 
-    public void Initialize(BubbleGums bubblegumData)
+
+
+    public void Initialize(BubbleGums bubblegumData, float powerlevel)
     {
         // Initialize the projectile with data from the selected Bubblegum weapon
         weaponData = bubblegumData;
@@ -28,12 +32,17 @@ public class BubbleGumsProjectile : MonoBehaviour
         slowAmount = weaponData.slowAmount;
         freezeDuration = weaponData.freezeDuration;
         destroyTime = weaponData.destroyTime;
+
+        // Apply power multiplier when initializing
+        powerSpeed = speed * powerlevel;
+
+        Debug.Log("Projectile Initialized - Power Speed: " + powerSpeed);
     }
 
     private void Update()
     {
         // Move the projectile forward
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * powerSpeed * Time.deltaTime);
         Destroy(gameObject,destroyTime);
     }
 

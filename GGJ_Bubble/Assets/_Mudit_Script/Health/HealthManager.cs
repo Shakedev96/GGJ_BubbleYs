@@ -11,6 +11,7 @@ public class HealthManager : MonoBehaviour
 
     public float currentHealth;
 
+    [SerializeField] private DynamicCamera dynamicCamera;
 
     void Start()
     {
@@ -68,13 +69,32 @@ public class HealthManager : MonoBehaviour
         // Check death
         if (currentHealth <= 0)
         {
+            // Hide the player 
+            gameObject.SetActive(false);
+
+            // Remove player from camera
+            Invoke("destroyPlayerCamera", 0.1f);
+
             // Handle death
-            Destroy(gameObject);
+            Invoke("destroyPlayer", 0.2f);
 
         }
 
 
     }
+
+    private void destroyPlayerCamera()
+    {
+        dynamicCamera = GameObject.FindWithTag("MainCamera").GetComponent<DynamicCamera>();
+        dynamicCamera.UpdatePlayerGameObjects(); // Call the function to update the player list
+
+    }
+
+    private void destroyPlayer()
+    {
+        Destroy(gameObject);
+    }
+
 }
 
 

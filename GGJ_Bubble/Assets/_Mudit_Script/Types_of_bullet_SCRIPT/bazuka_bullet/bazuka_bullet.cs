@@ -6,6 +6,7 @@ public class bazuka_bullet : MonoBehaviour
 {
     public GameObject[] Playerss;
     public BubbleGums bubblegums;
+ 
 
     private void OnCollisionEnter(Collision collision)
     {
