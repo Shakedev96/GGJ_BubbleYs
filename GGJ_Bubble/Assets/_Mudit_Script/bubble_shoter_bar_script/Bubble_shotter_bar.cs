@@ -11,7 +11,7 @@ public class Bubble_shotter_bar : MonoBehaviour
     public float minHeight ; // Minimum height of the bar
 
     private bool isGrowing = true; // Determines if the bar is growing or shrinking
-    private float powerLevel = 0f;
+    public float powerLevel = 0f;
 
     public bool shooting; // Whether the player is shooting
     public bool aiming;   // Whether the player is aiming
@@ -92,15 +92,15 @@ public class Bubble_shotter_bar : MonoBehaviour
         // Determine power level based on the bar's height
         if (height <= minHeight + (maxHeight - minHeight) / 3)
         {
-            powerLevel = 10; // Level 1
+            powerLevel = 1; // Level 1
         }
         else if (height <= minHeight + 2 * (maxHeight - minHeight) / 3)
         {
-            powerLevel = 20; // Level 2
+            powerLevel = 5f; // Level 2
         }
         else
         {
-            powerLevel = 30; // Level 3
+            powerLevel = 10f; // Level 3
         }
 
         // Output the power level

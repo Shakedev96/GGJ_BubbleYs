@@ -61,13 +61,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760274326379085710}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0.808, z: 0}
   m_LocalScale: {x: 60.173256, y: 82.90537, z: 60.173256}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3952188566367557625}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &2632858751311276689
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935293954063090514}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -158,7 +158,7 @@ Transform:
   - {fileID: 7935188478041754495}
   - {fileID: 6726412457585893964}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5836911220859646484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +206,7 @@ CapsuleCollider:
   serializedVersion: 2
   m_Radius: 0.35856414
   m_Height: 1.6911347
-  m_Direction: 1
+  m_Direction: 2
   m_Center: {x: 0, y: 0.8102845, z: -0.020205135}
 --- !u!1 &3117621518290572387
 GameObject:
@@ -20052,13 +20052,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9123319705534508530}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.8660254, y: 0, z: 0, w: -0.50000006}
-  m_LocalPosition: {x: 0, y: 1.5600002, z: -0.00000023841858}
+  m_LocalRotation: {x: 0.9563995, y: 0.006140912, z: -0.14991744, w: -0.2505734}
+  m_LocalPosition: {x: 0, y: 0.86, z: -0.09}
   m_LocalScale: {x: 1, y: 0.99999976, z: 0.99999976}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3952188566367557625}
-  m_LocalEulerAnglesHint: {x: -240, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 208.519, y: 19.261002, z: -5.674011}
 --- !u!2083052967 &2716377850327363898
 VisualEffect:
   m_ObjectHideFlags: 0

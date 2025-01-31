@@ -189,8 +189,15 @@ public class PlayerMovement : MonoBehaviour
             // Disable movement during dash
             canMove = false;
 
-            // Set the dash direction to the player's forward direction
-            dashDirection = transform.forward;
+            // Set the dash direction to match the movement input
+            // Create a normalized vector based on the moveInput direction
+            dashDirection = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
+
+            // If the moveInput is zero (player not moving), you can set a default dash direction (like forward)
+            if (dashDirection == Vector3.zero)
+            {
+                dashDirection = transform.forward; // Fallback to forward direction if no input is given
+            }
 
             // Reset dash timer
             dashTimeElapsed = 0f;

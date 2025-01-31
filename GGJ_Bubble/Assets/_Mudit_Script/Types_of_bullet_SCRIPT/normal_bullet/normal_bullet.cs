@@ -12,6 +12,7 @@ public class normal_bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            
             healthmanager = collision.gameObject.GetComponent<HealthManager>();
             healthmanager.damageHealth(bubblegums.baseDamage);
             Destroy(this.gameObject);

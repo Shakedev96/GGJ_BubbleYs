@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 48950230}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.2, y: 1, z: -11.4}
+  m_LocalPosition: {x: -16, y: 1, z: -15.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -175,7 +175,7 @@ Transform:
   m_GameObject: {fileID: 60447434}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 13.2, y: 1, z: -10.9}
+  m_LocalPosition: {x: -16.6, y: 1, z: 15.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -357,7 +357,7 @@ Transform:
   m_GameObject: {fileID: 713164682}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.4, y: 1, z: 11.3}
+  m_LocalPosition: {x: 15.4, y: 1, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -581,12 +581,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a920c5b14a6e441b3d8ee983687a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ALL_The_Player: []
+  playerObjects: []
   Main_camera: {fileID: 835226743}
   minFOV: 35
   maxFOV: 75
-  zoomSpeed: 0.15
-  zoomDistanceThreshold: 25
+  zoomSpeed: 0.3
+  zoomDistanceThreshold: 22
 --- !u!1 &852854061
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,7 +967,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -30.1, z: 0}
-  m_LocalScale: {x: 126.29534, y: 1.6295122, z: 111.85623}
+  m_LocalScale: {x: 189.6956, y: 2.4475272, z: 168.00806}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -984,6 +984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c28e30f2cedb9a4aa0e427a17df92a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dynamicCamera: {fileID: 0}
 --- !u!1 &1335492261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,7 +1294,19 @@ MonoBehaviour:
         m_CallState: 2
   m_PlayerLeftEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 835226745}
+        m_TargetAssemblyTypeName: DynamicCamera, Assembly-CSharp
+        m_MethodName: UpdatePlayerGameObjects
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_JoinAction:
     m_UseReference: 0
     m_Action:
@@ -1486,8 +1499,8 @@ MonoBehaviour:
   - {fileID: 1243633961402337046, guid: ec35234e924e7ce48b16ff57d87e4b58, type: 3}
   - {fileID: 3629855473613847947, guid: 8e681e14d9b688b4486f371918453c59, type: 3}
   spawnArea: {fileID: 1080593711}
-  minSpawnInterval: 2
-  maxSpawnInterval: 4
+  minSpawnInterval: 1
+  maxSpawnInterval: 2
   readyManager: {fileID: 1771305700}
 --- !u!4 &1971550737
 Transform:
@@ -1530,7 +1543,7 @@ Transform:
   m_GameObject: {fileID: 2116750588}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -11.4, y: 1, z: 10.7}
+  m_LocalPosition: {x: 15.3, y: 1, z: 17.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2404,6 +2417,74 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &8827590608812202897
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1423799741863138408, guid: 33ff28705ae931c4599108867688abe3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.2527246
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423799741863138408, guid: 33ff28705ae931c4599108867688abe3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.298463
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423799741863138408, guid: 33ff28705ae931c4599108867688abe3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.393339
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423799741863138408, guid: 33ff28705ae931c4599108867688abe3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423799741863138408, guid: 33ff28705ae931c4599108867688abe3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423799741863138408, guid: 33ff28705ae931c4599108867688abe3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423799741863138408, guid: 33ff28705ae931c4599108867688abe3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423799741863138408, guid: 33ff28705ae931c4599108867688abe3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423799741863138408, guid: 33ff28705ae931c4599108867688abe3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423799741863138408, guid: 33ff28705ae931c4599108867688abe3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069768070098390671, guid: 33ff28705ae931c4599108867688abe3,
+        type: 3}
+      propertyPath: m_Name
+      value: Audio Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 33ff28705ae931c4599108867688abe3, type: 3}
 --- !u!114 &9069448185816408253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2486,3 +2567,4 @@ SceneRoots:
   - {fileID: 4712329716298334608}
   - {fileID: 1959961420}
   - {fileID: 835226744}
+  - {fileID: 8827590608812202897}

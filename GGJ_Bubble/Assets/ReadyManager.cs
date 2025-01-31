@@ -55,13 +55,20 @@ public class ReadyManager : MonoBehaviour
         {
             StartCoroutine(StartCountdown());
 
+            for (int i = 0; i < playerObjects.Length; i++)
+            {
+                readyScripts[i].canReady = false;
+                readyScripts[i].playerIndicator.SetActive(true);
+
+            }
+
         }
     }
 
     // Countdown coroutine
     private IEnumerator StartCountdown()
     {
-
+        AudioManager.instance.PlayLevelClip(1f);
         isCountdownActive = true;
 
         int countdownValue = 3;

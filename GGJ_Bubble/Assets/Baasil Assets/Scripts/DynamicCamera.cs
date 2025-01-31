@@ -56,7 +56,7 @@ public class DynamicCamera : MonoBehaviour
 
     //--------------------------------------------------------------------Mudit---script----starts---here----------------------------------------------
 
-    public GameObject[] ALL_The_Player;
+    public GameObject[] playerObjects;
     public Camera Main_camera;
     Vector3 centerPoint;
 
@@ -69,17 +69,19 @@ public class DynamicCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        centerPoint = FindCenterPoint(ALL_The_Player);
+        // Only proceed if there are players
+        if (playerObjects.Length > 0)
+        {
+            // Find the center point of all players
+            centerPoint = FindCenterPoint(playerObjects);
+            // Look at the center of the players
+            transform.LookAt(centerPoint);
 
-        transform.LookAt(centerPoint);
-
-        // Calculate the distance between the players
-        float playerDistance = CalculatePlayerDistance();
-
-        // Adjust the camera's Field of View (FOV) based on distance
-        AdjustCameraZoom(playerDistance);
-
-        //Debug.LogAssertion(centerPoint);
+            // Calculate the distance between the furthest players
+            float playerDistance = CalculatePlayerDistance();
+            // Adjust the camera's Field of View (FOV) based on the players' spread
+            AdjustCameraZoom(playerDistance);
+        }
     }
 
     Vector3 FindCenterPoint(GameObject[] objects)
@@ -107,38 +109,65 @@ public class DynamicCamera : MonoBehaviour
         // Find all players with the "Player" tag
         GameObject[] foundPlayers = GameObject.FindGameObjectsWithTag("Player");
 
-        // Update the array with the new players
-        ALL_The_Player = new GameObject[foundPlayers.Length];
+        // Filter out null values directly in the array
+        int validCount = 0;
+
+        // Loop through the found players and keep track of valid (non-null) players
         for (int i = 0; i < foundPlayers.Length; i++)
         {
-            ALL_The_Player[i] = foundPlayers[i];
+            if (foundPlayers[i] != null) // If the player is valid (not destroyed)
+            {
+                foundPlayers[validCount] = foundPlayers[i]; // Shift valid player to the front
+                validCount++; // Increase the valid count
+            }
         }
+
+        // Resize the array to match the number of valid players
+        System.Array.Resize(ref foundPlayers, validCount);
+
+        // Update the playerObjects array
+        playerObjects = foundPlayers;
+
     }
+
     float CalculatePlayerDistance()
     {
-        if (ALL_The_Player.Length < 2)
+        if (playerObjects.Length < 2)
         {
             return 0f; // No valid distance if there are fewer than 2 players
         }
 
-        Vector3 firstPlayerPosition = ALL_The_Player[0].transform.position;
-        Vector3 lastPlayerPosition = ALL_The_Player[ALL_The_Player.Length - 1].transform.position;
+        float maxDistance = 0f;
 
-        // Calculate the distance between the first and last player
-        return Vector3.Distance(firstPlayerPosition, lastPlayerPosition);
+        // Calculate the distance between all players
+        for (int i = 0; i < playerObjects.Length; i++)
+        {
+            for (int j = i + 1; j < playerObjects.Length; j++)
+            {
+                float distance = Vector3.Distance(playerObjects[i].transform.position, playerObjects[j].transform.position);
+                maxDistance = Mathf.Max(maxDistance, distance); // Track the largest distance
+
+            }
+        }
+
+        return maxDistance;
     }
 
     void AdjustCameraZoom(float playerDistance)
     {
         // If the players are closer than the threshold distance, zoom in
-        if (playerDistance < zoomDistanceThreshold)
+        if (playerObjects.Length > 1) // Only adjust zoom when there are more than 1 player
         {
-            Main_camera.fieldOfView = Mathf.Lerp(Main_camera.fieldOfView, minFOV, Time.deltaTime * zoomSpeed);
+            if (playerDistance < zoomDistanceThreshold)
+            {
+                Main_camera.fieldOfView = Mathf.Lerp(Main_camera.fieldOfView, minFOV, Time.deltaTime * zoomSpeed);
+            }
+            else
+            {
+                Main_camera.fieldOfView = Mathf.Lerp(Main_camera.fieldOfView, maxFOV, Time.deltaTime * zoomSpeed);
+            }
         }
-        else // Otherwise, zoom out
-        {
-            Main_camera.fieldOfView = Mathf.Lerp(Main_camera.fieldOfView, maxFOV, Time.deltaTime * zoomSpeed);
-        }
+
     }
 }
 
