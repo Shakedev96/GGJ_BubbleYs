@@ -171,6 +171,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c036eeca04acf4399b7f847ee79219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
+  speed: 0
+  powerSpeed: 0
 --- !u!114 &-2487192836608064354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +188,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Playerss: []
   bubblegums: {fileID: 11400000, guid: c6e29537423c24c4f8aefff60147c2bc, type: 2}
+  ExplosionPrefab: {fileID: 3460122293920575419, guid: c239506b6883c4a5daca3c40e005ffb3,
+    type: 3}
 --- !u!136 &2624289406284882609
 CapsuleCollider:
   m_ObjectHideFlags: 0
