@@ -6,7 +6,7 @@ public class bazuka_bullet : MonoBehaviour
 {
     public GameObject[] Playerss;
     public BubbleGums bubblegums;
- 
+    public GameObject ExplosionPrefab;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -15,6 +15,7 @@ public class bazuka_bullet : MonoBehaviour
            if (bubblegums.areaDamage)
             {
                 ApplyAreaDamage();
+                Instantiate(ExplosionPrefab,transform.position,transform.rotation);
             }
             Destroy(this.gameObject);
         }

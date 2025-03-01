@@ -3032,6 +3032,7 @@ MonoBehaviour:
   growSpeed: 600
   maxHeight: 400
   minHeight: 40
+  powerLevel: 0
   shooting: 0
   aiming: 0
   height: 0
@@ -3048,7 +3049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 3213310904604753126}
-  maxHealth: 100
+  maxHealth: 50
   currentHealth: 0
   dynamicCamera: {fileID: 0}
 --- !u!1 &8373283957884594583
